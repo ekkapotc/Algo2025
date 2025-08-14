@@ -1,0 +1,5 @@
+/home/ekkapot/teaching/Algo/2025/Measurement/build/CMakeFiles/main-O0.dir
+/home/ekkapot/teaching/Algo/2025/Measurement/build/CMakeFiles/main-O3.dir
+/home/ekkapot/teaching/Algo/2025/Measurement/build/CMakeFiles/test.dir
+/home/ekkapot/teaching/Algo/2025/Measurement/build/CMakeFiles/edit_cache.dir
+/home/ekkapot/teaching/Algo/2025/Measurement/build/CMakeFiles/rebuild_cache.dir
