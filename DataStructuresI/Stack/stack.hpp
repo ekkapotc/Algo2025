@@ -4,7 +4,6 @@
 #include <cassert>
 #include <utility>
 #include <cstddef>
-#include <iostream>
 
 template <typename T>
 class stack{
@@ -20,7 +19,6 @@ class stack{
         delete [] m_data;
         m_data = new_data;
         m_cap = new_cap;
-        //std::cout << "\tm_cap changed from " << new_cap/2 << " to " << new_cap << std::endl; 
     }
   
   public:
@@ -45,25 +43,23 @@ class stack{
     }
 
     void push(const T & elem){
-       std::cout << "\tpushing const lvalue" << std::endl;
        if(m_size==m_cap) reallocate();
        m_data[m_size] = elem;
        m_size++;
     }
 
     void push(T && elem){
-       std::cout << "\tpushing rvalue" << std::endl;
        if(m_size==m_cap) reallocate();     
        m_data[m_size] = std::move(elem);
        m_size++;
     }
 
-    /*template <typename S>
+    template <typename S>
     void push(S && elem){
        if(m_size==m_cap) reallocate();
        m_data[m_size] = std::forward<S>(elem);
        m_size++;
-    }*/
+    }
  
     T & top() {
       assert(m_size>0);
