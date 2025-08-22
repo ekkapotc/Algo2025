@@ -50,6 +50,10 @@ class queue{
         return m_size==0;
     }
 
+    size_t size() const{
+	return m_size;
+    }
+
     void enqueue(const T & elem){
         if(full()) reallocate();
         m_data[m_tail] = elem;
