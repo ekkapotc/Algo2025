@@ -86,6 +86,15 @@ class heap{
         }
      }
 
+     T extract_max(){
+       assert(m_size>0);
+       auto cur_max = m_data[0];
+       m_data[0] = m_data[m_size-1];
+       m_size--;
+       max_heapify(0);
+       return cur_max;
+     }
+
      template<typename S>
      friend std::ostream& operator<<(std::ostream& os, const heap<S> & h) {
         for (size_t i {0}; i<h.m_size; i++) {
