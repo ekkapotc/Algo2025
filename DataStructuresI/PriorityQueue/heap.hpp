@@ -81,7 +81,7 @@ class heap{
      
      void build_max_heap(){
 	assert(m_size>0);
-	for(auto i {static_cast<int>(m_size/2)} ; i>=0 ; i--){
+	for(auto i {(static_cast<int>(m_size)/2)-1} ; i>=0 ; i--){
 	    max_heapify(i);
         }
      }
