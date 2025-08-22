@@ -14,12 +14,12 @@ $(TARGET) : $(OBJ)
 $(OBJ) : $(SRC) $(HDR)
 	$(CXX) $(CXXFLAGS) -c $<
 
+.PHONY: all clean run
+
 all : $(TARGET)
 
 clean :
 	rm -rf $(TARGET) $(OBJ)
-
-.PHONY: all clean run
 
 run: $(TARGET)
 	./$(TARGET)
