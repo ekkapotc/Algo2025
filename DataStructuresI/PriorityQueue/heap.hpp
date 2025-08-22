@@ -81,19 +81,18 @@ class heap{
      
      void build_max_heap(){
 	assert(m_size>0);
-	for(auto i {(static_cast<int>(m_size)/2)-1} ; i>=0 ; i--){
+	for(int i {(static_cast<int>(m_size)/2)-1} ; i>=0 ; i--){
 	    max_heapify(i);
         }
      }
 
      template<typename S>
      friend std::ostream& operator<<(std::ostream& os, const heap<S> & h) {
-        for (size_t i = 0; i < h.m_size; i++) {
+        for (size_t i {0}; i<h.m_size; i++) {
           os << h.m_data[i] << (i + 1 < h.m_size ? " " : "");
         }
         return os;
      }
-
 };
 
 #endif
