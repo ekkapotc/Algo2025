@@ -133,6 +133,7 @@ public:
     return cur_max;
   }
 
+  /*
   void insert(const T &elem) {
     if (full())
       reallocate();
@@ -157,6 +158,25 @@ public:
 
     size_t i = m_size++;
     m_data[i] = std::move(elem);
+
+    while (i > 0) {
+      size_t p = (i - 1) / 2;
+      if (m_data[i] > m_data[p]) {
+        std::swap(m_data[i], m_data[p]);
+        i = p;
+      } else {
+        break;
+      }
+    }
+  }
+  */
+
+  template <typename S> void insert(S &&elem) {
+    if (full())
+      reallocate();
+
+    size_t i = m_size++;
+    m_data[i] = std::forward<S>(elem);
 
     while (i > 0) {
       size_t p = (i - 1) / 2;
