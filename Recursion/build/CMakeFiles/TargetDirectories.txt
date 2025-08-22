@@ -1,5 +1,0 @@
-/home/ekkapot/teaching/Algo/2025/Recursion/build/CMakeFiles/add.dir
-/home/ekkapot/teaching/Algo/2025/Recursion/build/CMakeFiles/factorial.dir
-/home/ekkapot/teaching/Algo/2025/Recursion/build/CMakeFiles/fibonacci.dir
-/home/ekkapot/teaching/Algo/2025/Recursion/build/CMakeFiles/edit_cache.dir
-/home/ekkapot/teaching/Algo/2025/Recursion/build/CMakeFiles/rebuild_cache.dir
