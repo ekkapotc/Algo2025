@@ -39,7 +39,7 @@ private:
    already max heaps. max_heapify will push the violation downwards towards a
    leaf.
   */
-  
+
   /*
   void max_heapify(size_t i) {
     auto largest = i;
@@ -60,8 +60,8 @@ private:
   */
 
   void max_heapify(size_t i) {
-   
-    while(true){
+
+    while (true) {
       auto largest = i;
       auto left = 2 * i + 1;
       auto right = 2 * i + 2;
@@ -75,7 +75,7 @@ private:
       if (largest != i) {
         std::swap(m_data[largest], m_data[i]);
         i = largest;
-      }else{
+      } else {
         break;
       }
     }
