@@ -19,17 +19,15 @@ class queue{
     }
 
     void reallocate(){
-        if(full()){
-           size_t new_cap = m_cap*2;
-           T * new_data = new T[new_cap];
-           for(size_t i{0} ; i<m_size ; i++)
-             new_data[i] = std::move(m_data[(m_head+i)%m_cap]);
-           delete [] m_data;
-           m_data = new_data;
-           m_cap = new_cap;
-           m_head = 0;
-           m_tail = m_size;
-        }
+      size_t new_cap = m_cap*2;
+      T * new_data = new T[new_cap];
+      for(size_t i{0} ; i<m_size ; i++)
+         new_data[i] = std::move(m_data[(m_head+i)%m_cap]);
+      delete [] m_data;
+      m_data = new_data;
+      m_cap = new_cap;
+      m_head = 0;
+      m_tail = m_size;
     }
 
   public:
@@ -53,14 +51,14 @@ class queue{
     }
 
     void enqueue(const T & elem){
-        reallocate();
+        if(full()) reallocate();
         m_data[m_tail] = elem;
         m_tail = (m_tail+1)%m_cap;
         m_size++;
     }
 
     void enqueue(T && elem){
-        reallocate();
+        if(full()) reallocate();
         m_data[m_size] = std::move(elem);
         m_tail = (m_tail+1)%m_cap;
         m_size++;
