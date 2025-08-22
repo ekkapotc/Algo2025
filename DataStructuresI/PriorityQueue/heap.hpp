@@ -3,8 +3,11 @@
 
 #include <cassert>
 #include <cstddef>
+#include <cstring>
 #include <utility>
 #include <iostream>
+#include <vector>
+#include <type_traits>
 
 template <typename T>
 class heap{
@@ -53,10 +56,10 @@ class heap{
      m_cap{len}
      {
 	assert(m_cap>0);
-	m_data = new T[len];
+	m_data = new T[m_cap];
 
-	for(size_t i{0} ; i<len ; i++) 
-		m_data[i] = arr[i];
+	for(size_t i{0} ; i<m_cap ; i++) 
+	   m_data[i] = arr[i];
 
      	build_max_heap();
      }
@@ -67,7 +70,39 @@ class heap{
      template <size_t N>
      heap(const T (&arr)[N]):heap(arr,N){
      
-     } 
+     }
+
+     heap( const std::vector<T> & vec ):
+     m_data{nullptr},
+     m_size{vec.size()},
+     m_cap{vec.size()}
+     {	
+	assert(m_cap>0);
+	m_data = new T[m_cap];
+	
+	for(size_t i{0} ; i<m_cap ; i++)
+	   m_data[i] = vec[i];
+
+	build_max_heap();
+     }
+
+
+     heap( std::vector<T> && vec ):
+     m_data{nullptr},
+     m_size{vec.size()},
+     m_cap{vec.size()}
+     {	
+	assert(m_cap>0);
+	m_data = new T[m_cap];
+	
+	if constexpr (std::is_trivially_copyable_v<T>){
+	   std::memcpy(m_data , vec.data() , m_size*sizeof(T));
+        }else{
+	   for(size_t i{0} ; i<m_cap ; i++) m_data[i] = std::move(vec[i]);
+        }
+
+	build_max_heap();
+     }
 
      ~heap(){
 	delete [] m_data;
@@ -101,6 +136,11 @@ class heap{
        m_size--;
        max_heapify(0);
        return cur_max;
+     }
+
+     void insert(const T & elem){
+	if(full()) reallocate();
+	
      }
 
      template<typename S>
