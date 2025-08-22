@@ -50,15 +50,6 @@ class heap{
     }
     
   public:
-     heap(size_t cap=4):
-     m_data{nullptr},
-     m_size{0},
-     m_cap{cap}
-     {
-	assert(cap>0);
-	m_data = new T[m_cap];
-     }
-
      heap( const T * arr , size_t len ):
      m_data{nullptr},
      m_size{len},
