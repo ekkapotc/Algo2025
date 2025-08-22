@@ -11,6 +11,8 @@ private:
   size_t m_size;
   size_t m_cap;
 
+  bool full() const { return m_size == m_cap; }
+
   void reallocate() {
     size_t new_cap = 2 * m_cap;
     T *new_data = new T[new_cap];
@@ -41,14 +43,14 @@ public:
   }
 
   void push(T &&elem) {
-    if (m_size == m_cap)
+    if (full())
       reallocate();
     m_data[m_size] = std::move(elem);
     m_size++;
   }
 
   template <typename S> void push(S &&elem) {
-    if (m_size == m_cap)
+    if (full())
       reallocate();
     m_data[m_size] = std::forward<S>(elem);
     m_size++;
