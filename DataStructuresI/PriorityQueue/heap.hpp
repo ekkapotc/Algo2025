@@ -20,8 +20,14 @@ private:
   void reallocate() {
     size_t new_cap = 2 * m_cap;
     T *new_data = new T[new_cap];
-    for (size_t i{0}; i < m_size; i++)
-      new_data[i] = m_data[i];
+
+    if constexpr (std::is_trivially_copyable_v<T>) {
+      std::memcpy(new_data, m_data, m_size * sizeof(T));
+    } else {
+      for (size_t i{0}; i < m_size; i++)
+        new_data[i] = std::move(m_data[i]);
+    }
+
     delete[] m_data;
     m_data = new_data;
     m_cap = new_cap;
@@ -71,8 +77,12 @@ public:
     assert(m_cap > 0);
     m_data = new T[m_cap];
 
-    for (size_t i{0}; i < m_cap; i++)
-      m_data[i] = vec[i];
+    if constexpr (std::is_trivially_copyable_v<T>) {
+      std::memcpy(m_data, vec.data(), m_size * sizeof(T));
+    } else {
+      for (size_t i{0}; i < m_cap; i++)
+        m_data[i] = vec[i];
+    }
 
     build_max_heap();
   }
