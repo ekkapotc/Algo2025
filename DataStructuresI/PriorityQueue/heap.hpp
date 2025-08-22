@@ -61,8 +61,11 @@ class heap{
      	build_max_heap();
      }
 
+     /*
+	Wrapper constructor that deduces the number of elements (N)
+     */
      template <size_t N>
-     heap(const T (&arr)[N]):heap(arr, N){
+     heap(const T (&arr)[N]):heap(arr,N){
      
      } 
 
