@@ -50,10 +50,14 @@ class heap{
      heap( const T * arr , size_t len ):
      m_data{nullptr},
      m_size{len},
-     m_cap{len}{
+     m_cap{len}
+     {
 	assert(m_cap>0);
 	m_data = new T[len];
-	for(size_t i{0} ; i<len ; i++) m_data[i] = arr[i];
+
+	for(size_t i{0} ; i<len ; i++) 
+		m_data[i] = arr[i];
+
      	build_max_heap();
      }
 
@@ -70,14 +74,14 @@ class heap{
 	return m_size;
      }
 
-     T max() const {
+     T max() const{
 	assert(m_size>0);
 	return m_data[0];
      }
      
      void build_max_heap(){
 	assert(m_size>0);
-	for(auto i {static_cast<int>(m_size-1)} ; i>=0 ; i--){
+	for(auto i {static_cast<int>(m_size/2)} ; i>=0 ; i--){
 	    max_heapify(i);
         }
      }
