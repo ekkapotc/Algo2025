@@ -115,10 +115,10 @@ public:
 
   T extract_max() {
     assert(m_size > 0);
-    auto cur_max = m_data[0];
-    m_data[0] = m_data[m_size - 1];
+    auto cur_max = std::move(m_data[0]);
+    m_data[0] = std::move(m_data[m_size - 1]);
     m_size--;
-    max_heapify(0);
+    if(m_size>0) max_heapify(0);
     return cur_max;
   }
 
