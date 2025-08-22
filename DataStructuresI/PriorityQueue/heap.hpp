@@ -118,7 +118,8 @@ public:
     auto cur_max = std::move(m_data[0]);
     m_data[0] = std::move(m_data[m_size - 1]);
     m_size--;
-    if(m_size>0) max_heapify(0);
+    if (m_size > 0)
+      max_heapify(0);
     return cur_max;
   }
 
