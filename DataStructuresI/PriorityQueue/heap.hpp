@@ -36,14 +36,10 @@ class heap{
   	auto left = 2*i+1;
 	auto right = 2*i+2;
 	
-        if(left<m_size && m_data[left]>m_data[largest]){
-	   largest = left;
-        }
-	
-	if(right<m_size && m_data[right]>m_data[largest]){
-	   largest = right;
-        }
-
+        if(left<m_size && m_data[left]>m_data[largest]) largest = left;
+        
+	if(right<m_size && m_data[right]>m_data[largest]) largest = right;
+       
 	if(largest!=i){
    	   std::swap(m_data[largest],m_data[i]);
 	   max_heapify(largest);
