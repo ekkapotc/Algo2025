@@ -61,6 +61,11 @@ class heap{
      	build_max_heap();
      }
 
+     template <size_t N>
+     heap(const T (&arr)[N]):heap(arr, N){
+     
+     } 
+
      ~heap(){
 	delete [] m_data;
 	m_data = nullptr;
