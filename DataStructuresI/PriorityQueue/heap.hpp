@@ -86,11 +86,14 @@ class heap{
         }
      }
 
-     void print(){
-	for(size_t i{0} ; i<m_size ; i++){
-	   std::cout << "m_data[" << i << "] = " << m_data[i] << std::endl;
+     template<typename S>
+     friend std::ostream& operator<<(std::ostream& os, const heap<S> & h) {
+        for (size_t i = 0; i < h.m_size; i++) {
+          os << h.m_data[i] << (i + 1 < h.m_size ? " " : "");
         }
+        return os;
      }
+
 };
 
 #endif
