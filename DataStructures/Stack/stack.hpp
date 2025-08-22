@@ -35,8 +35,9 @@ public:
 
   size_t size() const { return m_size; }
 
+  /*
   void push(const T &elem) {
-    if (m_size == m_cap)
+    if (full())
       reallocate();
     m_data[m_size] = elem;
     m_size++;
@@ -47,7 +48,7 @@ public:
       reallocate();
     m_data[m_size] = std::move(elem);
     m_size++;
-  }
+  }*/
 
   template <typename S> void push(S &&elem) {
     if (full())
