@@ -3,7 +3,7 @@
 
 #include "snode.hpp"
 
-int main(){
+int main() {
   SNode<int> ni1{3};
   SNode<int> ni2{4};
   ni1.set_next(&ni2);
