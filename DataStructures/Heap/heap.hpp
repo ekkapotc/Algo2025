@@ -88,7 +88,6 @@ private:
     }
   }
 
-  
 public:
   heap(const T *arr, size_t len) : m_data{nullptr}, m_size{len}, m_cap{len} {
     assert(m_cap > 0);
@@ -214,7 +213,6 @@ public:
       max_heapify(0);
     return cur_max;
   }
-
 
   template <typename S>
   friend std::ostream &operator<<(std::ostream &os, const heap<S> &h) {
