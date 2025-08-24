@@ -81,6 +81,23 @@ private:
     }
   }
 
+  void build_max_heap() {
+    assert(m_size > 0);
+    for (int i{(static_cast<int>(m_size) / 2) - 1}; i >= 0; i--) {
+      max_heapify(i);
+    }
+  }
+
+  T extract_max() {
+    assert(m_size > 0);
+    auto cur_max = std::move(m_data[0]);
+    m_data[0] = std::move(m_data[m_size - 1]);
+    m_size--;
+    if (m_size > 0)
+      max_heapify(0);
+    return cur_max;
+  }
+
 public:
   heap(const T *arr, size_t len) : m_data{nullptr}, m_size{len}, m_cap{len} {
     assert(m_cap > 0);
@@ -139,23 +156,6 @@ public:
   T max() const {
     assert(m_size > 0);
     return m_data[0];
-  }
-
-  void build_max_heap() {
-    assert(m_size > 0);
-    for (int i{(static_cast<int>(m_size) / 2) - 1}; i >= 0; i--) {
-      max_heapify(i);
-    }
-  }
-
-  T extract_max() {
-    assert(m_size > 0);
-    auto cur_max = std::move(m_data[0]);
-    m_data[0] = std::move(m_data[m_size - 1]);
-    m_size--;
-    if (m_size > 0)
-      max_heapify(0);
-    return cur_max;
   }
 
   /*
