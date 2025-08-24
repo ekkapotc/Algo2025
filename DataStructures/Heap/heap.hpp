@@ -88,16 +88,7 @@ private:
     }
   }
 
-  T extract_max() {
-    assert(m_size > 0);
-    auto cur_max = std::move(m_data[0]);
-    m_data[0] = std::move(m_data[m_size - 1]);
-    m_size--;
-    if (m_size > 0)
-      max_heapify(0);
-    return cur_max;
-  }
-
+  
 public:
   heap(const T *arr, size_t len) : m_data{nullptr}, m_size{len}, m_cap{len} {
     assert(m_cap > 0);
@@ -213,6 +204,17 @@ public:
       }
     }
   }
+
+  T extract_max() {
+    assert(m_size > 0);
+    auto cur_max = std::move(m_data[0]);
+    m_data[0] = std::move(m_data[m_size - 1]);
+    m_size--;
+    if (m_size > 0)
+      max_heapify(0);
+    return cur_max;
+  }
+
 
   template <typename S>
   friend std::ostream &operator<<(std::ostream &os, const heap<S> &h) {
