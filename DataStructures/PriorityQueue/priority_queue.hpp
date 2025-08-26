@@ -1,8 +1,8 @@
 #ifndef PRIORITY_QUEUE_HPP_INC
 #define PRIORITY_QUEUE_HPP_INC
 
-#include "PQNode.hpp"
 #include "heap.hpp"
+#include "priority_queue_node.hpp"
 
 template <typename S, typename T> class priority_queue {
 private:
