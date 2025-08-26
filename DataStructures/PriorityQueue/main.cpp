@@ -16,5 +16,7 @@ int main() {
     std::cout << "\tExtracted : " << pq_sd.extract_max() << std::endl;
   }
 
+  std::cout << "Priority Queue content : " << pq_sd << std::endl;
+
   return 0;
 }
