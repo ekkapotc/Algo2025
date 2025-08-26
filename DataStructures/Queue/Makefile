@@ -5,7 +5,7 @@ OBJ := $(SRC:.cpp=.o)
 
 CXX := g++
 
-CXXFLAGS := -Wall -g -O0
+CXXFLAGS := -Wall -Werror -Wpedantic -g -O0
 LDFLAGS := 
 
 $(TARGET) : $(OBJ)
