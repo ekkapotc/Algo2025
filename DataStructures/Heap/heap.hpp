@@ -219,16 +219,12 @@ public:
     return cur_max;
   }
 
-  template <typename S>
-  friend std::ostream &operator<<(std::ostream &os, const heap<S> &h);
-};
-
-template <typename S>
-std::ostream &operator<<(std::ostream &os, const heap<S> &h) {
-  for (size_t i{0}; i < h.m_size; i++) {
-    os << h.m_data[i] << (i + 1 < h.m_size ? " " : "");
+  friend std::ostream &operator<<(std::ostream &os, const heap<T> &h) {
+    for (size_t i{0}; i < h.m_size; i++) {
+      os << h.m_data[i] << (i + 1 < h.m_size ? " " : "");
+    }
+    return os;
   }
-  return os;
-}
+};
 
 #endif
