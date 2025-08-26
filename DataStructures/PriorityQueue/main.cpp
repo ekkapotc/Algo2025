@@ -10,6 +10,7 @@ int main() {
   pq_sd.insert("Hideyuki", 2.0);
   pq_sd.insert("Simon", 7.0);
   pq_sd.insert("Mickey", 2.0);
+
   std::cout << "Priority Queue content : " << pq_sd << std::endl;
 
   while (!pq_sd.empty()) {
