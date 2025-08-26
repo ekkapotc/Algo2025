@@ -5,8 +5,8 @@ OBJ := $(SRC:.cpp=.o)
 
 CXX := g++
 
-CXXFLAGS := -Wall -Werror -Wpedantic -g -O0 -std=c++20
-LDFLAGS := 
+CXXFLAGS := -Wall -Werror -Wpedantic -g -O0
+LDFLAGS :=  
 
 $(TARGET) : $(OBJ)
 	$(CXX) -o $@ $^ $(LDFLAGS)

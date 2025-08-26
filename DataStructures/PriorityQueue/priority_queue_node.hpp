@@ -4,8 +4,14 @@
 #include <type_traits>
 #include <utility>
 
+#if __GNUC__ >= 11 && __cplusplus >= 202002L
+  #define REQUIRES_ARITHMETIC(T) requires std::is_arithmetic_v<T>
+#else
+  #define REQUIRES_ARITHMETIC(T)
+#endif
+
 template <typename S, typename T>
-requires std::is_arithmetic_v<T>
+REQUIRES_ARITHMETIC(T)
 class PQNode {
 private:
   S m_data;
