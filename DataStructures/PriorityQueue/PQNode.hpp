@@ -4,7 +4,7 @@
 #include <type_traits>
 #include <utility>
 
-template <typename S , typename T>
+template <typename S, typename T>
 requires std::is_arithmetic_v<T>
 class PQNode {
 private:
@@ -30,35 +30,35 @@ public:
 
   void set_priority(T new_prio) { m_prio = new_prio; }
 
-  friend std::ostream & operator << ( std::ostream & os , const PQNode<S,T> & node ){
-     os << "(data=" << node.get_data() << ",priority=" << node.get_priority() << ")";
-     return os;
-  } 
-
-  friend bool operator <= ( const PQNode<S,T> & p , const PQNode<S,T> & q ){
-     return p.m_prio<=q.m_prio;
-  }
-  
-  friend bool operator >= ( const PQNode<S,T> & p , const PQNode<S,T> & q ){
-     return p.m_prio>=q.m_prio;
-  }
-  
-  friend bool operator < ( const PQNode<S,T> & p , const PQNode<S,T> & q ){
-     return p.m_prio<q.m_prio;
-  }
-  
-  friend bool operator > ( const PQNode<S,T> & p , const PQNode<S,T> & q ){
-     return p.m_prio>q.m_prio;
+  friend std::ostream &operator<<(std::ostream &os, const PQNode<S, T> &node) {
+    os << "(data=" << node.get_data() << ",priority=" << node.get_priority()
+       << ")";
+    return os;
   }
 
-  friend bool operator == ( const PQNode<S,T> & p , const PQNode<S,T> & q ){
-     return p.m_prio==q.m_prio;
+  friend bool operator<=(const PQNode<S, T> &p, const PQNode<S, T> &q) {
+    return p.m_prio <= q.m_prio;
   }
-  
-  friend bool operator != ( const PQNode<S,T> & p , const PQNode<S,T> & q ){
-     return p.m_prio!=q.m_prio;
+
+  friend bool operator>=(const PQNode<S, T> &p, const PQNode<S, T> &q) {
+    return p.m_prio >= q.m_prio;
   }
- 
+
+  friend bool operator<(const PQNode<S, T> &p, const PQNode<S, T> &q) {
+    return p.m_prio < q.m_prio;
+  }
+
+  friend bool operator>(const PQNode<S, T> &p, const PQNode<S, T> &q) {
+    return p.m_prio > q.m_prio;
+  }
+
+  friend bool operator==(const PQNode<S, T> &p, const PQNode<S, T> &q) {
+    return p.m_prio == q.m_prio;
+  }
+
+  friend bool operator!=(const PQNode<S, T> &p, const PQNode<S, T> &q) {
+    return p.m_prio != q.m_prio;
+  }
 };
 
 #endif

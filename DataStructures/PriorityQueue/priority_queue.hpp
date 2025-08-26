@@ -1,44 +1,37 @@
 #ifndef PRIORITY_QUEUE_HPP_INC
 #define PRIORITY_QUEUE_HPP_INC
 
-#include "heap.hpp"
 #include "PQNode.hpp"
+#include "heap.hpp"
 
-template <typename S , typename T>
-class priority_queue{
-  private:
-    heap<PQNode<S,T>> m_heap;
-  public:
-    priority_queue() = default;
+template <typename S, typename T> class priority_queue {
+private:
+  heap<PQNode<S, T>> m_heap;
 
-    bool empty() const{
-	return m_heap.empty();
-    }
+public:
+  priority_queue() = default;
 
-    size_t size() const{
-	return m_heap.size();
-    }
+  bool empty() const { return m_heap.empty(); }
 
-    void insert(const S & elem , T prio){
-       m_heap.insert(PQNode<S,T>{elem,prio});
-    }
+  size_t size() const { return m_heap.size(); }
 
-    void insert(S && elem , T prio){
-       m_heap.insert(PQNode<S,T>{std::move(elem),prio});
-    }
+  void insert(const S &elem, T prio) {
+    m_heap.insert(PQNode<S, T>{elem, prio});
+  }
 
-    const S max() const{
-       return m_heap.max().get_data();
-    }
+  void insert(S &&elem, T prio) {
+    m_heap.insert(PQNode<S, T>{std::move(elem), prio});
+  }
 
-    S & extract_max(){
-	return m_heap.extract_max().get_data();
-    }
+  const S max() const { return m_heap.max().get_data(); }
 
-    friend std::ostream & operator << (std::ostream & os , const priority_queue<S,T> & pq){
- 	os << pq.m_heap;
-        return os;
-    }
+  S &extract_max() { return m_heap.extract_max().get_data(); }
+
+  friend std::ostream &operator<<(std::ostream &os,
+                                  const priority_queue<S, T> &pq) {
+    os << pq.m_heap;
+    return os;
+  }
 };
 
 #endif
