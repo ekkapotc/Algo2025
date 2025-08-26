@@ -89,6 +89,11 @@ private:
   }
 
 public:
+  heap(size_t len = 16) : m_data{nullptr}, m_size{0}, m_cap{len} {
+    assert(m_cap > 0);
+    m_data = new T[m_cap];
+  }
+
   heap(const T *arr, size_t len) : m_data{nullptr}, m_size{len}, m_cap{len} {
     assert(m_cap > 0);
     m_data = new T[m_cap];
