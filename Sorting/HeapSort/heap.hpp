@@ -48,19 +48,19 @@ private:
 
   /*
   void heapify(size_t i) {
-    auto largest = i;
+    auto root = i;
     auto left = 2 * i + 1;
     auto right = 2 * i + 2;
 
-    if (left < m_size && m_cmp(m_data[left] , m_data[largest]))
-      largest = left;
+    if (left < m_size && m_cmp(m_data[left] , m_data[root]))
+      root = left;
 
-    if (right < m_size && m_cmp(m_data[right] , m_data[largest]))
-      largest = right;
+    if (right < m_size && m_cmp(m_data[right] , m_data[root]))
+      root = right;
 
-    if (largest != i) {
-      std::swap(m_data[largest], m_data[i]);
-      heapify(largest);
+    if (root != i) {
+      std::swap(m_data[root], m_data[i]);
+      heapify(root);
     }
   }
   */
@@ -240,19 +240,19 @@ public:
   void heapify(size_t i) {
 
     while (true) {
-      auto largest = i;
+      auto root = i;
       auto left = 2 * i + 1;
       auto right = 2 * i + 2;
 
-      if (left < m_size && m_cmp(m_data[left], m_data[largest]))
-        largest = left;
+      if (left < m_size && m_cmp(m_data[left], m_data[root]))
+        root = left;
 
-      if (right < m_size && m_cmp(m_data[right], m_data[largest]))
-        largest = right;
+      if (right < m_size && m_cmp(m_data[right], m_data[root]))
+        root = right;
 
-      if (largest != i) {
-        std::swap(m_data[largest], m_data[i]);
-        i = largest;
+      if (root != i) {
+        std::swap(m_data[root], m_data[i]);
+        i = root;
       } else {
         break;
       }
