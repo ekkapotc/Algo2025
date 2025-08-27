@@ -16,7 +16,8 @@ int main() {
     std::cout << sorted_data_int[i] << (i + 1 < v.size() ? "," : "\n");
   }
 
-  std::vector<std::string> w = {"string","int","char","bool","vector","float","map","double","stack","long"};
+  std::vector<std::string> w = {"string", "int", "char",   "bool",  "vector",
+                                "float",  "map", "double", "stack", "long"};
 
   heap_sort<std::string> h_str{w};
 
@@ -24,8 +25,8 @@ int main() {
 
   std::cout << "Sorted: (increasing)" << std::endl;
 
-  for(size_t i{0}; i < w.size(); i++){
-     std::cout << sorted_data_str[i] << (i + 1 < w.size() ? "," : "\n");
+  for (size_t i{0}; i < w.size(); i++) {
+    std::cout << sorted_data_str[i] << (i + 1 < w.size() ? "," : "\n");
   }
 
   return 0;
