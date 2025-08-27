@@ -32,6 +32,14 @@ public:
       m_data[i] = std::move(vec[i]);
   }
 
+  heap_sort(const heap_sort& other) = delete;
+  
+  heap_sort(heap_sort && other) = delete;
+
+  heap_sort & operator=(const heap_sort & other) = delete;
+
+  heap_sort & operator=(heap_sort && other) = delete;
+
   ~heap_sort() { delete[] m_data; }
 
   const T * sort() {
