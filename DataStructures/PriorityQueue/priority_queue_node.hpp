@@ -35,7 +35,7 @@ public:
   void set_priority(T new_prio) { m_prio = new_prio; }
 
   friend std::ostream &operator<<(std::ostream &os, const PQNode<S, T> &node) {
-    os << "(data=" << node.get_data() << ",priority=" << node.get_priority()
+    os << "(data=" << node.get_data() << " , priority=" << node.get_priority()
        << ")";
     return os;
   }
