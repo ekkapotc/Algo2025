@@ -1,20 +1,21 @@
 #include "heap.hpp"
 #include <iostream>
+#include <functional>
 
 int main() {
   // ===== Test heap<int> construction from array =====
   int arr[] = {4, 8, 2, 0, 9, 5, 12, 32, 20, 18, 6};
   std::cout << "Testing heap<int> from array:" << std::endl;
 
-  heap<int> heap_int{arr};
+  heap<int,std::less<int>> heap_int{arr};
   std::cout << "\tInitial size = " << heap_int.size() << std::endl;
   std::cout << "\tHeap contents: " << heap_int << std::endl;
-  std::cout << "\tCurrent max = " << heap_int.max() << std::endl;
+  std::cout << "\tCurrent root = " << heap_int.root() << std::endl;
 
-  // ===== Extract elements to test max_heapify and extract_max =====
+  // ===== Extract elements to test root_heapify and extract_root =====
   std::cout << "Extracting all elements:" << std::endl;
   while (!heap_int.empty()) {
-    std::cout << "\tExtracted: " << heap_int.extract_max() << std::endl;
+    std::cout << "\tExtracted: " << heap_int.extract_root() << std::endl;
   }
   std::cout << "\tSize after extraction = " << heap_int.size() << std::endl;
 
@@ -42,7 +43,7 @@ int main() {
 
   std::cout << "Extracting all elements from heap<float>:" << std::endl;
   while (!heap_flt.empty()) {
-    std::cout << "\tExtracted: " << heap_flt.extract_max() << std::endl;
+    std::cout << "\tExtracted: " << heap_flt.extract_root() << std::endl;
   }
   std::cout << "\tSize after extraction = " << heap_flt.size() << std::endl;
 

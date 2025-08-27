@@ -8,12 +8,14 @@
 #include <type_traits>
 #include <utility>
 #include <vector>
+#include <functional>
 
-template <typename T> class heap {
+template <typename T,typename Compare=std::greater<T>> class heap {
 private:
   T *m_data;
   size_t m_size;
   size_t m_cap;
+  Compare m_cmp;
 
   bool full() const { return m_size == m_cap; }
 
@@ -59,17 +61,17 @@ private:
   }
   */
 
-  void max_heapify(size_t i) {
+  void heapify(size_t i) {
 
     while (true) {
       auto largest = i;
       auto left = 2 * i + 1;
       auto right = 2 * i + 2;
 
-      if (left < m_size && m_data[left] > m_data[largest])
+      if (left < m_size && m_cmp(m_data[left] , m_data[largest]))
         largest = left;
 
-      if (right < m_size && m_data[right] > m_data[largest])
+      if (right < m_size && m_cmp(m_data[right] , m_data[largest]))
         largest = right;
 
       if (largest != i) {
@@ -81,10 +83,10 @@ private:
     }
   }
 
-  void build_max_heap() {
+  void build_heap() {
     assert(m_size > 0);
     for (int i{(static_cast<int>(m_size) / 2) - 1}; i >= 0; i--) {
-      max_heapify(i);
+      heapify(i);
     }
   }
 
@@ -101,7 +103,7 @@ public:
     for (size_t i{0}; i < m_cap; i++)
       m_data[i] = arr[i];
 
-    build_max_heap();
+    build_heap();
   }
 
   /*
@@ -121,7 +123,7 @@ public:
         m_data[i] = vec[i];
     }
 
-    build_max_heap();
+    build_heap();
   }
 
   heap(std::vector<T> &&vec)
@@ -136,7 +138,7 @@ public:
         m_data[i] = std::move(vec[i]);
     }
 
-    build_max_heap();
+    build_heap();
   }
 
   ~heap() {
@@ -148,7 +150,7 @@ public:
 
   size_t size() const { return m_size; }
 
-  T max() const {
+  T root() const {
     assert(m_size > 0);
     return m_data[0];
   }
@@ -200,7 +202,7 @@ public:
 
     while (i > 0) {
       size_t p = (i - 1) / 2;
-      if (m_data[i] > m_data[p]) {
+      if (m_cmp(m_data[i] , m_data[p])) {
         std::swap(m_data[i], m_data[p]);
         i = p;
       } else {
@@ -209,26 +211,31 @@ public:
     }
   }
 
-  T extract_max() {
+  T extract_root() {
     assert(m_size > 0);
-    auto cur_max = std::move(m_data[0]);
+    auto cur_root = std::move(m_data[0]);
     m_data[0] = std::move(m_data[m_size - 1]);
     m_size--;
     if (m_size > 0)
-      max_heapify(0);
-    return cur_max;
+      heapify(0);
+    return cur_root;
   }
 
   T &operator[](size_t index) { return m_data[index]; }
 
   const T &operator[](size_t index) const { return m_data[index]; }
 
-  friend std::ostream &operator<<(std::ostream &os, const heap<T> &h) {
-    for (size_t i{0}; i < h.m_size; i++) {
-      os << h[i] << (i + 1 < h.m_size ? " " : "");
-    }
-    return os;
-  }
+  template<typename S , typename Comp>
+  friend std::ostream &operator<<(std::ostream &os, const heap<S,Comp> &h);
 };
+
+template<typename S , typename Compare>
+std::ostream &operator<<(std::ostream &os, const heap<S,Compare> &h) {
+  for (size_t i{0}; i < h.m_size; i++) {
+    os << h[i] << (i + 1 < h.m_size ? " " : "");
+  }
+  return os;
+}
+
 
 #endif
