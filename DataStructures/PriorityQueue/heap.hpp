@@ -219,6 +219,10 @@ public:
     return cur_max;
   }
 
+  T & operator[] (size_t index) { return m_data[index]; }
+  
+  const T & operator [] (size_t index) const { return m_data[index];}
+
   friend std::ostream &operator<<(std::ostream &os, const heap<T> &h) {
     for (size_t i{0}; i < h.m_size; i++) {
       os << h.m_data[i] << (i + 1 < h.m_size ? " " : "");

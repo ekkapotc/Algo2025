@@ -1,6 +1,8 @@
 #ifndef PRIORITY_QUEUE_HPP_INC
 #define PRIORITY_QUEUE_HPP_INC
 
+#include <limits>
+
 #include "heap.hpp"
 #include "priority_queue_node.hpp"
 
@@ -16,11 +18,13 @@ public:
   size_t size() const { return m_heap.size(); }
 
   void insert(const S &elem, T prio) {
-    m_heap.insert(PQNode<S, T>{elem, prio});
+    m_heap.insert(PQNode<S, T>{elem, std::numeric_limits<T>::lowest()});
+    increase_key(m_heap.size()-1,prio);
   }
 
   void insert(S &&elem, T prio) {
-    m_heap.insert(PQNode<S, T>{std::move(elem), prio});
+    m_heap.insert(PQNode<S, T>{std::move(elem), std::numeric_limits<T>::lowest()});
+    increase_key(m_heap.size()-1,prio);
   }
 
   const S max() const { return m_heap.max().get_data(); }
