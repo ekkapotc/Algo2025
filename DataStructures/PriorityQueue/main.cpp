@@ -14,23 +14,33 @@ int main() {
 
   std::cout << "Priority Queue content : " << pq_sd << std::endl;
 
-  std::cout << "\tExtracted : " << pq_sd.extract_root() << std::endl;
+  priority_queue<std::string, double> pq_sd_copy{std::move(pq_sd)};
 
-  std::cout << "Priority Queue content : " << pq_sd << std::endl;
+  std::cout << "\tExtracted : " << pq_sd_copy.extract_root() << std::endl;
 
-  pq_sd.insert("Adam", 5.0);
+  std::cout << "Priority Queue content : " << pq_sd_copy << std::endl;
+
+  pq_sd_copy.insert("Adam", 5.0);
 
   std::cout << "\tInserted (data=Adam , priority=5.0)" << std::endl;
 
-  pq_sd.insert("Jennie", 6.1);
+  pq_sd_copy.insert("Jennie", 6.1);
 
   std::cout << "\tInserted (data=Jennie , priority=6.1)" << std::endl;
 
-  std::cout << "Priority Queue content : " << pq_sd << std::endl;
+  std::cout << "Priority Queue content : " << pq_sd_copy << std::endl;
 
-  while (!pq_sd.empty()) {
-    std::cout << "\tExtracted : " << pq_sd.extract_root() << std::endl;
+  while (!pq_sd_copy.empty()) {
+    std::cout << "\tExtracted : " << pq_sd_copy.extract_root() << std::endl;
   }
+
+  std::cout << "Priority Queue content : " << pq_sd_copy << std::endl;
+
+  pq_sd_copy.insert("Araya", 4.2);
+
+  std::cout << "\tInserted (data=Araya , priority=4.2)" << std::endl;
+
+  pq_sd = pq_sd_copy;
 
   std::cout << "Priority Queue content : " << pq_sd << std::endl;
 

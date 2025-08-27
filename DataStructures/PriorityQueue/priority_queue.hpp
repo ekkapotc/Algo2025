@@ -16,6 +16,14 @@ private:
 public:
   priority_queue() = default;
 
+  priority_queue(const priority_queue & other) = default;
+
+  priority_queue(priority_queue && other) noexcept = default;
+
+  priority_queue & operator=(const priority_queue & other) = default;
+
+  priority_queue & operator=(priority_queue && other) noexcept = default;
+
   bool empty() const { return m_heap.empty(); }
 
   size_t size() const { return m_heap.size(); }
