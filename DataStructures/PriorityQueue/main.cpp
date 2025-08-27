@@ -13,6 +13,20 @@ int main() {
 
   std::cout << "Priority Queue content : " << pq_sd << std::endl;
 
+  std::cout << "\tExtracted : " << pq_sd.extract_max()  << std::endl;
+
+  std::cout << "Priority Queue content : " << pq_sd << std::endl;
+
+  pq_sd.insert("Adam",5.0);
+
+  std::cout << "\tInserted (data=Adam , priority=5.0)"<< std::endl; 
+
+  pq_sd.insert("Jennie", 6.0);
+
+  std::cout << "\tInserted (data=Jennie , priority=6.0)" << std::endl; 
+
+  std::cout << "Priority Queue content : " << pq_sd << std::endl;
+
   while (!pq_sd.empty()) {
     std::cout << "\tExtracted : " << pq_sd.extract_max() << std::endl;
   }
