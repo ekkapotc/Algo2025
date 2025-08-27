@@ -42,7 +42,7 @@ public:
 
   ~heap_sort() { delete[] m_data; }
 
-  const T *sort() {
+  T *sort() {
     if (m_data) {
       heap<T, Compare> h{m_data, m_len};
       for (size_t i{m_len - 1}; i > 0; --i) {
