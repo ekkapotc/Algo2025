@@ -29,6 +29,8 @@ int main() {
     std::cout << sorted_data_str[i] << (i + 1 < w.size() ? "," : "\n");
   }
 
+  sorted_data_str[4] = std::string{"array"}; 
+
   sorted_data_str = h_str.sort();
 
   std::cout << "ReSorted: (increasing)" << std::endl;
