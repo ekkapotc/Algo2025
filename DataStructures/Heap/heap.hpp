@@ -4,13 +4,13 @@
 #include <cassert>
 #include <cstddef>
 #include <cstring>
+#include <functional>
 #include <iostream>
 #include <type_traits>
 #include <utility>
 #include <vector>
-#include <functional>
 
-template <typename T,typename Compare=std::greater<T>> class heap {
+template <typename T, typename Compare = std::greater<T>> class heap {
 private:
   T *m_data;
   size_t m_size;
@@ -43,20 +43,20 @@ private:
   */
 
   /*
-  void max_heapify(size_t i) {
+  void heapify(size_t i) {
     auto largest = i;
     auto left = 2 * i + 1;
     auto right = 2 * i + 2;
 
-    if (left < m_size && m_data[left] > m_data[largest])
+    if (left < m_size && m_cmp(m_data[left] , m_data[largest]))
       largest = left;
 
-    if (right < m_size && m_data[right] > m_data[largest])
+    if (right < m_size && m_cmp(m_data[right] , m_data[largest]))
       largest = right;
 
     if (largest != i) {
       std::swap(m_data[largest], m_data[i]);
-      max_heapify(largest);
+      heapify(largest);
     }
   }
   */
@@ -68,10 +68,10 @@ private:
       auto left = 2 * i + 1;
       auto right = 2 * i + 2;
 
-      if (left < m_size && m_cmp(m_data[left] , m_data[largest]))
+      if (left < m_size && m_cmp(m_data[left], m_data[largest]))
         largest = left;
 
-      if (right < m_size && m_cmp(m_data[right] , m_data[largest]))
+      if (right < m_size && m_cmp(m_data[right], m_data[largest]))
         largest = right;
 
       if (largest != i) {
@@ -165,7 +165,7 @@ public:
 
     while (i > 0) {
       size_t p = (i - 1) / 2;
-      if (m_data[i] > m_data[p]) {
+      if (m_cmp(m_data[i] , m_data[p])) {
         std::swap(m_data[i], m_data[p]);
         i = p;
       } else {
@@ -183,7 +183,7 @@ public:
 
     while (i > 0) {
       size_t p = (i - 1) / 2;
-      if (m_data[i] > m_data[p]) {
+      if (m_cmp(m_data[i] , m_data[p])) {
         std::swap(m_data[i], m_data[p]);
         i = p;
       } else {
@@ -202,7 +202,7 @@ public:
 
     while (i > 0) {
       size_t p = (i - 1) / 2;
-      if (m_cmp(m_data[i] , m_data[p])) {
+      if (m_cmp(m_data[i], m_data[p])) {
         std::swap(m_data[i], m_data[p]);
         i = p;
       } else {
@@ -225,17 +225,16 @@ public:
 
   const T &operator[](size_t index) const { return m_data[index]; }
 
-  template<typename S , typename Comp>
-  friend std::ostream &operator<<(std::ostream &os, const heap<S,Comp> &h);
+  template <typename S, typename Comp>
+  friend std::ostream &operator<<(std::ostream &os, const heap<S, Comp> &h);
 };
 
-template<typename S , typename Compare>
-std::ostream &operator<<(std::ostream &os, const heap<S,Compare> &h) {
+template <typename S, typename Compare>
+std::ostream &operator<<(std::ostream &os, const heap<S, Compare> &h) {
   for (size_t i{0}; i < h.m_size; i++) {
     os << h[i] << (i + 1 < h.m_size ? " " : "");
   }
   return os;
 }
-
 
 #endif
