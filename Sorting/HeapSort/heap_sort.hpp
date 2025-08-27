@@ -55,8 +55,19 @@ public:
 
       m_data = new T[m_len];
 
-      for (size_t i{0}; i < m_len; i++)
-        m_data[i] = std::move((h.data())[i]);
+      for (size_t i{0}; i < m_len; i++) {
+        if constexpr (std::is_trivially_copyable_v<T>) {
+          std::memcpy(m_data, h.data(), m_len * sizeof(T));
+        } else {
+          for (size_t i{0}; i < m_len; i++) {
+            if constexpr (std::is_move_constructible_v<T>) {
+              m_data[i] = std::move((h.data())[i]);
+            } else {
+              m_data[i] = (h.data())[i];
+            }
+          }
+        }
+      }
     }
 
     return m_data;
