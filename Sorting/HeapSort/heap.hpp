@@ -124,18 +124,16 @@ public:
     m_data = nullptr;
   }
 
-  const T * data() const{
-    return m_data;
-  }
+  const T *data() const { return m_data; }
 
   bool empty() const { return m_size == 0; }
 
   size_t size() const { return m_size; }
 
   size_t shrink() {
-     auto prev = m_size;
-     m_size--;
-     return prev;
+    auto prev = m_size;
+    m_size--;
+    return prev;
   }
 
   T root() const {
