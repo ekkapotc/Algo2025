@@ -29,5 +29,13 @@ int main() {
     std::cout << sorted_data_str[i] << (i + 1 < w.size() ? "," : "\n");
   }
 
+  sorted_data_str = h_str.sort();
+
+  std::cout << "ReSorted: (increasing)" << std::endl;
+
+  for (size_t i{0}; i < w.size(); i++) {
+    std::cout << sorted_data_str[i] << (i + 1 < w.size() ? "," : "\n");
+  }
+
   return 0;
 }
