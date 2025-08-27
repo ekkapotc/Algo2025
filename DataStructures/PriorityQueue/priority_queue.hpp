@@ -49,7 +49,9 @@ public:
     assert(pos < size());
 
     if constexpr (std::is_same_v<Compare, std::greater<PQNode<S, T>>>) {
-
+	
+      assert(new_key >= m_heap[pos].get_priority());
+	
       if (new_key >= m_heap[pos].get_priority()) {
         m_heap[pos].set_priority(new_key);
 
@@ -64,6 +66,9 @@ public:
         }
       }
     } else if constexpr (std::is_same_v<Compare, std::less<PQNode<S, T>>>) {
+      
+      assert(new_key <= m_heap[pos].get_priority());
+
       if (new_key <= m_heap[pos].get_priority()) {
         m_heap[pos].set_priority(new_key);
 
