@@ -6,7 +6,7 @@ int main(){
 
   heap_sort<int,std::less<int>> h_int{v};
 
-  const int * sorted_data = h_int.sort();
+  auto sorted_data = h_int.sort();
  
   std::cout << "Sorted: " << std::endl;
  
