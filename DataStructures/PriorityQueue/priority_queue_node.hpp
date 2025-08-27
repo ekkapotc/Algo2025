@@ -5,14 +5,12 @@
 #include <utility>
 
 #if __GNUC__ >= 11 && __cplusplus >= 202002L
-  #define REQUIRES_ARITHMETIC(T) requires std::is_arithmetic_v<T>
+#define REQUIRES_ARITHMETIC(T) requires std::is_arithmetic_v<T>
 #else
-  #define REQUIRES_ARITHMETIC(T)
+#define REQUIRES_ARITHMETIC(T)
 #endif
 
-template <typename S, typename T>
-REQUIRES_ARITHMETIC(T)
-class PQNode {
+template <typename S, typename T> REQUIRES_ARITHMETIC(T) class PQNode {
 private:
   S m_data;
   T m_prio;
