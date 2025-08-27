@@ -4,7 +4,7 @@
 #include "priority_queue.hpp"
 
 int main() {
-  priority_queue<std::string, double, std::less<PQNode<std::string, double>>>
+  priority_queue<std::string, double, std::greater<PQNode<std::string, double>>>
       pq_sd;
   pq_sd.insert("Bosco", 1.0);
   pq_sd.insert("Liz", 4.5);

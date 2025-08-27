@@ -11,6 +11,7 @@ template <typename S, typename T, typename Compare = std::greater<PQNode<S, T>>>
 class priority_queue {
 private:
   heap<PQNode<S, T>, Compare> m_heap;
+  Compare m_cmp;
 
 public:
   priority_queue() = default;
@@ -52,36 +53,25 @@ public:
 
       assert(new_key >= m_heap[pos].get_priority());
 
-      if (new_key >= m_heap[pos].get_priority()) {
+      if (new_key >= m_heap[pos].get_priority())
         m_heap[pos].set_priority(new_key);
 
-        while (pos > 0) {
-          size_t parent = (pos - 1) / 2;
-
-          if (m_heap[parent].get_priority() >= m_heap[pos].get_priority())
-            break;
-
-          std::swap(m_heap[pos], m_heap[parent]);
-          pos = parent;
-        }
-      }
     } else if constexpr (std::is_same_v<Compare, std::less<PQNode<S, T>>>) {
 
       assert(new_key <= m_heap[pos].get_priority());
 
-      if (new_key <= m_heap[pos].get_priority()) {
+      if (new_key <= m_heap[pos].get_priority())
         m_heap[pos].set_priority(new_key);
+    }
 
-        while (pos > 0) {
-          size_t parent = (pos - 1) / 2;
+    while (pos > 0) {
+      size_t parent = (pos - 1) / 2;
 
-          if (m_heap[parent].get_priority() <= m_heap[pos].get_priority())
-            break;
+      if (m_cmp(m_heap[parent], m_heap[pos]))
+        break;
 
-          std::swap(m_heap[pos], m_heap[parent]);
-          pos = parent;
-        }
-      }
+      std::swap(m_heap[pos], m_heap[parent]);
+      pos = parent;
     }
   }
 
