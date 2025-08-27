@@ -192,7 +192,10 @@ public:
 
   size_t size() const { return m_size; }
 
-  void shrink() { m_size--; }
+  void shrink() {
+    assert(m_size > 0);
+    m_size--;
+  }
 
   T root() const {
     assert(m_size > 0);
