@@ -27,7 +27,11 @@ private:
       std::memcpy(new_data, m_data, m_size * sizeof(T));
     } else {
       for (size_t i{0}; i < m_size; i++)
-        new_data[i] = std::move(m_data[i]);
+        if constexpr (std::is_move_constructible_v<T>) {
+          new_data[i] = std::move(m_data[i]);
+        } else {
+          new_data[i] = m_data[i];
+        }
     }
 
     delete[] m_data;
@@ -61,28 +65,6 @@ private:
   }
   */
 
-  void heapify(size_t i) {
-
-    while (true) {
-      auto largest = i;
-      auto left = 2 * i + 1;
-      auto right = 2 * i + 2;
-
-      if (left < m_size && m_cmp(m_data[left], m_data[largest]))
-        largest = left;
-
-      if (right < m_size && m_cmp(m_data[right], m_data[largest]))
-        largest = right;
-
-      if (largest != i) {
-        std::swap(m_data[largest], m_data[i]);
-        i = largest;
-      } else {
-        break;
-      }
-    }
-  }
-
   void build_heap() {
     assert(m_size > 0);
     for (int i{(static_cast<int>(m_size) / 2) - 1}; i >= 0; i--) {
@@ -100,7 +82,7 @@ public:
     assert(m_cap > 0);
     m_data = new T[m_cap];
 
-    for (size_t i{0}; i < m_cap; i++)
+    for (size_t i{0}; i < m_size; i++)
       m_data[i] = arr[i];
 
     build_heap();
@@ -119,7 +101,7 @@ public:
     if constexpr (std::is_trivially_copyable_v<T>) {
       std::memcpy(m_data, vec.data(), m_size * sizeof(T));
     } else {
-      for (size_t i{0}; i < m_cap; i++)
+      for (size_t i{0}; i < m_size; i++)
         m_data[i] = vec[i];
     }
 
@@ -134,11 +116,69 @@ public:
     if constexpr (std::is_trivially_copyable_v<T>) {
       std::memcpy(m_data, vec.data(), m_size * sizeof(T));
     } else {
-      for (size_t i{0}; i < m_cap; i++)
+      for (size_t i{0}; i < m_size; i++)
         m_data[i] = std::move(vec[i]);
     }
 
     build_heap();
+  }
+
+  heap(const heap &other) {
+    m_size = other.m_size;
+    m_cap = other.m_cap;
+    m_data = new T[m_cap];
+
+    if constexpr (std::is_trivially_copyable_v<T>) {
+      std::memcpy(m_data, other.m_data, m_size * sizeof(T));
+    } else {
+      for (size_t i{0}; i < m_size; i++)
+        m_data[i] = other.m_data[i];
+    }
+  }
+
+  heap(heap &&other) noexcept {
+    m_size = other.m_size;
+    m_cap = other.m_cap;
+    m_data = other.m_data;
+
+    other.m_data = nullptr;
+    other.m_size = 0;
+    other.m_cap = 0;
+  }
+
+  heap &operator=(const heap &other) {
+    if (this != &other) {
+
+      delete[] m_data;
+
+      m_size = other.m_size;
+      m_cap = other.m_cap;
+      m_data = new T[m_cap];
+
+      if constexpr (std::is_trivially_copyable_v<T>) {
+        std::memcpy(m_data, other.m_data, m_size * sizeof(T));
+      } else {
+        for (size_t i{0}; i < m_size; i++)
+          m_data[i] = other.m_data[i];
+      }
+    }
+    return *this;
+  }
+
+  heap &operator=(heap &&other) noexcept {
+    if (this != &other) {
+
+      delete[] m_data;
+
+      m_size = other.m_size;
+      m_cap = other.m_cap;
+      m_data = other.m_data;
+
+      other.m_data = nullptr;
+      other.m_size = 0;
+      other.m_cap = 0;
+    }
+    return *this;
   }
 
   ~heap() {
@@ -146,9 +186,13 @@ public:
     m_data = nullptr;
   }
 
+  const T *data() const { return m_data; }
+
   bool empty() const { return m_size == 0; }
 
   size_t size() const { return m_size; }
+
+  void shrink() { m_size--; }
 
   T root() const {
     assert(m_size > 0);
@@ -192,6 +236,28 @@ public:
     }
   }
   */
+
+  void heapify(size_t i) {
+
+    while (true) {
+      auto largest = i;
+      auto left = 2 * i + 1;
+      auto right = 2 * i + 2;
+
+      if (left < m_size && m_cmp(m_data[left], m_data[largest]))
+        largest = left;
+
+      if (right < m_size && m_cmp(m_data[right], m_data[largest]))
+        largest = right;
+
+      if (largest != i) {
+        std::swap(m_data[largest], m_data[i]);
+        i = largest;
+      } else {
+        break;
+      }
+    }
+  }
 
   template <typename S> void insert(S &&elem) {
     if (full())
