@@ -50,9 +50,9 @@ public:
     }
   }
 
-  const S root() const { return m_heap.root().get_data(); }
+  const S root() const { return m_heap.root().get_payload(); }
 
-  S &extract_root() { return m_heap.extract_root().get_data(); }
+  S &extract_root() { return m_heap.extract_root().get_payload(); }
 
   void update_key(size_t pos, const T &new_key) {
     assert(pos < size());

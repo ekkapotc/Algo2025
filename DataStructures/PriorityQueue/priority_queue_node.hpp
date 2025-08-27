@@ -12,15 +12,15 @@
 
 template <typename S, typename T> REQUIRES_ARITHMETIC(T) class PQNode {
 private:
-  S m_data;
+  S m_payload;
   T m_prio;
 
 public:
   PQNode() = default;
 
-  PQNode(const S &data, const T prio) : m_data{data}, m_prio{prio} {}
+  PQNode(const S &payload, const T prio) : m_payload{payload}, m_prio{prio} {}
 
-  PQNode(S &&data, const T prio) : m_data{data}, m_prio{prio} {}
+  PQNode(S &&payload, const T prio) : m_payload{payload}, m_prio{prio} {}
 
   PQNode(const PQNode &) = default;
 
@@ -30,20 +30,20 @@ public:
 
   PQNode &operator=(PQNode &&) noexcept = default;
 
-  S &get_data() { return m_data; }
+  S &get_payload() { return m_payload; }
 
-  const S &get_data() const { return m_data; }
+  const S &get_payload() const { return m_payload; }
 
-  void set_data(const S &new_data) { m_data = new_data; }
+  void set_payload(const S &new_payload) { m_payload = new_payload; }
 
-  void set_data(S &&new_data) { m_data = std::move(new_data); }
+  void set_payload(S &&new_payload) { m_payload = std::move(new_payload); }
 
   T get_priority() const { return m_prio; }
 
   void set_priority(T new_prio) { m_prio = new_prio; }
 
   friend std::ostream &operator<<(std::ostream &os, const PQNode<S, T> &node) {
-    os << "(data=" << node.get_data() << " , priority=" << node.get_priority()
+    os << "(payload=" << node.get_payload() << " , priority=" << node.get_priority()
        << ")";
     return os;
   }

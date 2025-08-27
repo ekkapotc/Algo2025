@@ -22,11 +22,11 @@ int main() {
 
   pq_sd_copy.insert("Adam", 5.0);
 
-  std::cout << "\tInserted (data=Adam , priority=5.0)" << std::endl;
+  std::cout << "\tInserted (payload=Adam , priority=5.0)" << std::endl;
 
   pq_sd_copy.insert("Jennie", 6.1);
 
-  std::cout << "\tInserted (data=Jennie , priority=6.1)" << std::endl;
+  std::cout << "\tInserted (payload=Jennie , priority=6.1)" << std::endl;
 
   std::cout << "Priority Queue content : " << pq_sd_copy << std::endl;
 
@@ -38,7 +38,7 @@ int main() {
 
   pq_sd_copy.insert("Araya", 4.2);
 
-  std::cout << "\tInserted (data=Araya , priority=4.2)" << std::endl;
+  std::cout << "\tInserted (payload=Araya , priority=4.2)" << std::endl;
 
   pq_sd = pq_sd_copy;
 
