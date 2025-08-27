@@ -1,6 +1,11 @@
 #ifndef HEAP_SORT_HPP_INC
 #define HEAP_SORT_HPP_INC
 
+#include <cassert>
+#include <cstring>
+#include <functional>
+#include <type_traits>
+#include <utility>
 #include <vector>
 
 #include "heap.hpp"
