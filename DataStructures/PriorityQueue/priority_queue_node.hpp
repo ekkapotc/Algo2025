@@ -22,13 +22,13 @@ public:
 
   PQNode(S &&data, const T prio) : m_data{data}, m_prio{prio} {}
 
-  PQNode(const PQNode&) = default;
-  
-  PQNode(PQNode&&) noexcept = default;
-  
-  PQNode& operator=(const PQNode&) = default;
-  
-  PQNode& operator=(PQNode&&) noexcept = default;
+  PQNode(const PQNode &) = default;
+
+  PQNode(PQNode &&) noexcept = default;
+
+  PQNode &operator=(const PQNode &) = default;
+
+  PQNode &operator=(PQNode &&) noexcept = default;
 
   S &get_data() { return m_data; }
 
