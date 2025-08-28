@@ -50,7 +50,7 @@ public:
 
   void enqueue(T && elem){
       if(full()) reallocate();
-      m_data[m_size] = std::move(elem);
+      m_data[m_tail] = std::move(elem);
       m_tail = (m_tail+1)%m_cap;
       m_size++;
   }
@@ -59,15 +59,15 @@ public:
   template <typename S> void enqueue(S &&elem) {
     if (full())
       reallocate();
-    m_data[m_size] = std::forward<S>(elem);
+    m_data[m_tail] = std::forward<S>(elem);
     m_tail = (m_tail + 1) % m_cap;
     m_size++;
   }
 
   T dequeue() {
     assert(m_size > 0);
-    m_head = (m_head + 1) % m_cap;
     T first = std::move(m_data[m_head]);
+    m_head = (m_head+1)%m_cap;
     m_size--;
     return first;
   }
