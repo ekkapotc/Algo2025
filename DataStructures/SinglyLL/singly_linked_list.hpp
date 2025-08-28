@@ -75,9 +75,18 @@ public:
 
   singly_linked_list &operator=(singly_linked_list &&other) noexcept {
     if (this != &other) {
-      delete[] m_head;
+      
+      SNode<T> *curr = m_head;
+
+      while (curr) {
+        SNode<T> *tmp = curr;
+        curr = curr->get_next();
+        delete tmp;
+      }
+
       m_size = other.m_size;
       m_head = other.m_head;
+
       other.m_size = 0;
       other.m_head = nullptr;
     }
