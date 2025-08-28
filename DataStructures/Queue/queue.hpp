@@ -77,7 +77,17 @@ public:
     return m_data[m_head];
   }
 
+  const T &head() const {
+    assert(m_size > 0);
+    return m_data[m_head];
+  }
+
   T &tail() {
+    assert(m_size > 0);
+    return m_data[(m_tail + m_cap - 1) % m_cap];
+  }
+
+  const T &tail() const {
     assert(m_size > 0);
     return m_data[(m_tail + m_cap - 1) % m_cap];
   }
