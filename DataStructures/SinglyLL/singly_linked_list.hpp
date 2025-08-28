@@ -13,11 +13,11 @@ private:
   size_t m_size;
 
   template <typename U> void add_node(U &&val) {
-    auto *new_node = new SNode<T>(std::forward<U>(val));
+    SNode<T> *new_node = new SNode<T>(std::forward<U>(val));
     if (!m_head) {
       m_head = new_node;
     } else {
-      auto *curr = m_head;
+      SNode<T> *curr = m_head;
       while (curr->get_next()) {
         curr = curr->get_next();
       }
