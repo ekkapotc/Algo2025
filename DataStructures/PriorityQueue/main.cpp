@@ -3,15 +3,15 @@
 #include <iostream>
 #include <string>
 
-template <typename S, typename T>
-std::ostream &operator<<(std::ostream &os, const PQNode<S, T> &node) {
+template <typename U, typename V>
+std::ostream &operator<<(std::ostream &os, const PQNode<U, V> &node) {
   os << "(payload=" << node.get_payload()
      << " , priority=" << node.get_priority() << ")";
   return os;
 }
 
-template <typename S, typename Comp>
-std::ostream &operator<<(std::ostream &os, const heap<S, Comp> &h) {
+template <typename T, typename Comp>
+std::ostream &operator<<(std::ostream &os, const heap<T, Comp> &h) {
   for (size_t i{0}; i < h.size(); i++) {
     os << h[i] << (i + 1 < h.size() ? " " : "");
   }
