@@ -50,6 +50,10 @@ public:
     }
   }
 
+  heap<PQNode<S, T>,Compare> & get_heap() { return m_heap; }
+
+  const heap<PQNode<S, T>,Compare> & get_heap() const { return m_heap; }
+
   const S root() const { return m_heap.root().get_payload(); }
 
   S &extract_root() { return m_heap.extract_root().get_payload(); }
@@ -83,16 +87,6 @@ public:
     }
   }
 
-  template <typename U, typename V, typename Comp>
-  friend std::ostream &operator<<(std::ostream &os,
-                                  const priority_queue<U, V, Comp> &pq);
-};
-
-template <typename U, typename V, typename Comp>
-std::ostream &operator<<(std::ostream &os,
-                         const priority_queue<U, V, Comp> &pq) {
-  os << pq.m_heap;
-  return os;
-}
+ };
 
 #endif

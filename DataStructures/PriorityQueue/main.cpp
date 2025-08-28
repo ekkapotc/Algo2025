@@ -3,6 +3,28 @@
 #include <iostream>
 #include <string>
 
+template <typename S, typename T>
+std::ostream &operator<<(std::ostream &os, const PQNode<S, T> &node) {
+    os << "(payload=" << node.get_payload() << " , priority=" << node.get_priority()
+       << ")";
+    return os;  
+}
+
+template <typename S, typename Comp>
+std::ostream &operator<<(std::ostream &os, const heap<S, Comp> &h) {
+  for (size_t i{0}; i < h.size(); i++) {
+    os << h[i] << (i + 1 < h.size() ? " " : "");
+  }
+  return os;
+}
+
+template <typename U, typename V, typename Comp>
+std::ostream &operator<<(std::ostream &os,
+                         const priority_queue<U, V, Comp> &pq) {
+  os << pq.get_heap();
+  return os;
+}
+
 int main() {
   std::cout << "=== Testing MAX-HEAP (default) ===\n";
   priority_queue<std::string, double> max_pq;
