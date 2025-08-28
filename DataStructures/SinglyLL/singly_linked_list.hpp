@@ -102,6 +102,10 @@ public:
     }
   }
 
+  SNode<T> *head() { return m_head; }
+
+  const SNode<T> *head() const { return m_head; }
+
   size_t size() const { return m_size; }
 
   bool empty() const { return m_size == 0; }
@@ -140,21 +144,6 @@ public:
   template <typename S> void remove(S &&val) {
     remove(static_cast<const T &>(val));
   }
-
-  template <typename S>
-  friend std::ostream &operator<<(std::ostream &os,
-                                  const singly_linked_list<S> &l);
 };
-
-template <typename S>
-std::ostream &operator<<(std::ostream &os, const singly_linked_list<S> &l) {
-  SNode<S> *curr = l.m_head;
-  os << "size : " << l.size() << std::endl;
-  while (curr) {
-    os << curr->get_val() << (curr->get_next() ? " , " : "");
-    curr = curr->get_next();
-  }
-  return os;
-}
 
 #endif

@@ -1,15 +1,25 @@
 #include <iostream>
 #include <string>
-#include <utility>  // for std::move
+#include <utility> // for std::move
 
 #include "singly_linked_list.hpp"
 
 template <typename T>
+std::ostream &operator<<(std::ostream &os, const singly_linked_list<T> &l) {
+  const SNode<T> *curr = l.head();
+  os << "size : " << l.size() << std::endl;
+  while (curr) {
+    os << curr->get_val() << (curr->get_next() ? " , " : "");
+    curr = curr->get_next();
+  }
+  return os;
+}
+
+template <typename T>
 void print_list(const singly_linked_list<T> &list,
                 const std::string &msg = "") {
-  std::cout << msg << " [size=" << list.size()
-            << ", empty=" << std::boolalpha << list.empty() << "]: "
-            << list << "\n";
+  std::cout << msg << " [size=" << list.size() << ", empty=" << std::boolalpha
+            << list.empty() << "]: " << list << "\n";
 }
 
 singly_linked_list<std::string> make_list() {
@@ -17,7 +27,7 @@ singly_linked_list<std::string> make_list() {
   l.add("Carol");
   l.add("Eve");
   l.add("Carol");
-  return l;   // returned as rvalue -> triggers move constructor
+  return l; // returned as rvalue -> triggers move constructor
 }
 
 int main() {
@@ -63,9 +73,11 @@ int main() {
   l_str_move_asm.add("Carol");
   print_list(l_str_move_asm, "Before move assignment");
 
-  l_str_move_asm = std::move(l_str_move_con); // --> will trigger move assignment
+  l_str_move_asm =
+      std::move(l_str_move_con); // --> will trigger move assignment
   print_list(l_str_move_asm, "After move assignment from l_str_move_con");
-  print_list(l_str_move_con, "l_str_move_con after being moved from (should be empty)");
+  print_list(l_str_move_con,
+             "l_str_move_con after being moved from (should be empty)");
 
   // ==== Test with integers ====
   singly_linked_list<int> l_int;
@@ -95,4 +107,3 @@ int main() {
 
   return 0;
 }
-
