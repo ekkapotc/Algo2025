@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <utility>  
+#include <utility>  // for std::move
 
 #include "singly_linked_list.hpp"
 
@@ -17,7 +17,7 @@ singly_linked_list<std::string> make_list() {
   l.add("Carol");
   l.add("Eve");
   l.add("Carol");
-  return l;   // returned as rvalue -> will trigger move constructor
+  return l;   // returned as rvalue -> triggers move constructor
 }
 
 int main() {
@@ -50,14 +50,22 @@ int main() {
   singly_linked_list<std::string> l_str_move_con = make_list();
   print_list(l_str_move_con, "Move-constructed list from make_list()");
 
+  // Move source should be empty after move construction
+  singly_linked_list<std::string> l_str_temp = make_list();
+  print_list(l_str_temp, "Before moving from l_str_temp");
+  singly_linked_list<std::string> l_str_moved_to(std::move(l_str_temp));
+  print_list(l_str_moved_to, "After move-constructing into l_str_moved_to");
+  print_list(l_str_temp, "l_str_temp after being moved from (should be empty)");
+
   // ==== Test with move assignment ====
   singly_linked_list<std::string> l_str_move_asm;
   l_str_move_asm.add("Alice");
   l_str_move_asm.add("Carol");
   print_list(l_str_move_asm, "Before move assignment");
 
-  l_str_move_asm = std::move(l_str_move_con); // will trigger move assignment
+  l_str_move_asm = std::move(l_str_move_con); // --> will trigger move assignment
   print_list(l_str_move_asm, "After move assignment from l_str_move_con");
+  print_list(l_str_move_con, "l_str_move_con after being moved from (should be empty)");
 
   // ==== Test with integers ====
   singly_linked_list<int> l_int;
