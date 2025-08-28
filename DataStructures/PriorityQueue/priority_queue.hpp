@@ -50,9 +50,9 @@ public:
     }
   }
 
-  heap<PQNode<S, T>,Compare> & get_heap() { return m_heap; }
+  heap<PQNode<S, T>, Compare> &get_heap() { return m_heap; }
 
-  const heap<PQNode<S, T>,Compare> & get_heap() const { return m_heap; }
+  const heap<PQNode<S, T>, Compare> &get_heap() const { return m_heap; }
 
   const S root() const { return m_heap.root().get_payload(); }
 
@@ -86,7 +86,6 @@ public:
       pos = parent;
     }
   }
-
- };
+};
 
 #endif

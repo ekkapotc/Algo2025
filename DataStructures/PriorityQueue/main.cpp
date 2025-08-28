@@ -5,9 +5,9 @@
 
 template <typename S, typename T>
 std::ostream &operator<<(std::ostream &os, const PQNode<S, T> &node) {
-    os << "(payload=" << node.get_payload() << " , priority=" << node.get_priority()
-       << ")";
-    return os;  
+  os << "(payload=" << node.get_payload()
+     << " , priority=" << node.get_priority() << ")";
+  return os;
 }
 
 template <typename S, typename Comp>

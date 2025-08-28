@@ -41,7 +41,7 @@ public:
   T get_priority() const { return m_prio; }
 
   void set_priority(T new_prio) { m_prio = new_prio; }
- 
+
   friend bool operator<=(const PQNode<S, T> &p, const PQNode<S, T> &q) {
     return p.m_prio <= q.m_prio;
   }
