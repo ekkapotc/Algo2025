@@ -27,7 +27,7 @@ int main() {
   std::cout << l_str << std::endl;
 
   singly_linked_list<int> l_int;
-  
+
   l_int.add(3);
   l_int.add(10);
   l_int.add(5);
@@ -43,6 +43,14 @@ int main() {
   l_int.remove(10);
 
   std::cout << l_int << std::endl;
+
+  singly_linked_list<int> l_int_copy_con{l_int};
+
+  std::cout << l_int_copy_con << std::endl;
+
+  singly_linked_list<int> l_int_copy_asm = l_int;
+
+  std::cout << l_int_copy_asm << std::endl;
 
   return 0;
 }

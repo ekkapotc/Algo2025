@@ -29,11 +29,44 @@ private:
 public:
   singly_linked_list() : m_head{nullptr}, m_size{0} {}
 
-  singly_linked_list(const singly_linked_list &other) = delete;
+  singly_linked_list(const singly_linked_list &other)
+      : m_head{nullptr}, m_size{other.m_size} {
+    SNode<T> *other_curr = other.m_head;
+    SNode<T> *this_curr = nullptr;
+    while (other_curr) {
+      SNode<T> *new_node = new SNode<T>(other_curr->get_val());
+      if (other_curr == other.m_head) { // first node
+        m_head = new_node;
+      } else { // some node in the middle
+        this_curr->set_next(new_node);
+      }
+
+      this_curr = new_node;
+      other_curr = other_curr->get_next();
+    }
+  }
 
   singly_linked_list(singly_linked_list &&other) = delete;
 
-  singly_linked_list &operator=(const singly_linked_list &other) = delete;
+  singly_linked_list &operator=(const singly_linked_list &other) {
+    if (this != &other) {
+      SNode<T> *other_curr = other.m_head;
+      SNode<T> *this_curr = nullptr;
+      while (other_curr) {
+        SNode<T> *new_node = new SNode<T>(other_curr->get_val());
+        if (other_curr == other.m_head) { // first node
+          m_head = new_node;
+        } else { // some node in the middle
+          this_curr->set_next(new_node);
+        }
+        this_curr = new_node;
+        other_curr = other_curr->get_next();
+      }
+      m_size = other.m_size;
+    }
+
+    return *this;
+  }
 
   singly_linked_list &operator=(singly_linked_list &&other) = delete;
 
