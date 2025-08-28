@@ -1,7 +1,8 @@
-#include "singly_linked_list.hpp"
 #include <iostream>
 #include <string>
-#include <utility>  // for std::move
+#include <utility>  
+
+#include "singly_linked_list.hpp"
 
 template <typename T>
 void print_list(const singly_linked_list<T> &list,
@@ -55,7 +56,7 @@ int main() {
   l_str_move_asm.add("Carol");
   print_list(l_str_move_asm, "Before move assignment");
 
-  l_str_move_asm = std::move(l_str_move_con); // <-- real move assignment
+  l_str_move_asm = std::move(l_str_move_con); // will trigger move assignment
   print_list(l_str_move_asm, "After move assignment from l_str_move_con");
 
   // ==== Test with integers ====
