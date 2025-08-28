@@ -46,7 +46,12 @@ public:
     }
   }
 
-  singly_linked_list(singly_linked_list &&other) = delete;
+  singly_linked_list(singly_linked_list &&other) noexcept {
+    m_size = other.m_size;
+    m_head = other.m_head;
+    other.m_size = 0;
+    other.m_head = nullptr;
+  }
 
   singly_linked_list &operator=(const singly_linked_list &other) {
     if (this != &other) {
@@ -68,7 +73,16 @@ public:
     return *this;
   }
 
-  singly_linked_list &operator=(singly_linked_list &&other) = delete;
+  singly_linked_list &operator=(singly_linked_list &&other) noexcept {
+    if (this != &other) {
+      delete[] m_head;
+      m_size = other.m_size;
+      m_head = other.m_head;
+      other.m_size = 0;
+      other.m_head = nullptr;
+    }
+    return *this;
+  }
 
   ~singly_linked_list() {
     SNode<T> *curr = m_head;
@@ -119,7 +133,8 @@ public:
   }
 
   template <typename S>
-  friend std::ostream &operator<<(std::ostream &os, const singly_linked_list<S> &l);
+  friend std::ostream &operator<<(std::ostream &os,
+                                  const singly_linked_list<S> &l);
 };
 
 template <typename S>
