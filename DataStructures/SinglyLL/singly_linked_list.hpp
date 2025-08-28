@@ -9,7 +9,7 @@
 template <typename T> class singly_linked_list {
 private:
   SNode<T> *m_head;
-  
+
   size_t m_size;
 
   template <typename U> void add_node(U &&val) {
@@ -26,7 +26,6 @@ private:
     m_size++;
   }
 
-
 public:
   singly_linked_list() : m_head{nullptr}, m_size{0} {}
 
@@ -39,9 +38,9 @@ public:
   singly_linked_list &operator=(singly_linked_list &&other) = delete;
 
   ~singly_linked_list() {
-    SNode<T> * curr = m_head;
+    SNode<T> *curr = m_head;
     while (curr) {
-      SNode<T> * tmp = curr;
+      SNode<T> *tmp = curr;
       curr = curr->get_next();
       delete tmp;
     }
