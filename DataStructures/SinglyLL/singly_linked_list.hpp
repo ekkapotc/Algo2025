@@ -9,7 +9,23 @@
 template <typename T> class singly_linked_list {
 private:
   SNode<T> *m_head;
+  
   size_t m_size;
+
+  template <typename U> void add_node(U &&val) {
+    auto *new_node = new SNode<T>(std::forward<U>(val));
+    if (!m_head) {
+      m_head = new_node;
+    } else {
+      auto *curr = m_head;
+      while (curr->get_next()) {
+        curr = curr->get_next();
+      }
+      curr->set_next(new_node);
+    }
+    m_size++;
+  }
+
 
 public:
   singly_linked_list() : m_head{nullptr}, m_size{0} {}
@@ -34,20 +50,6 @@ public:
   size_t size() const { return m_size; }
 
   bool empty() const { return m_size == 0; }
-
-  template <typename U> void add_node(U &&val) {
-    auto *new_node = new SNode<T>(std::forward<U>(val));
-    if (!m_head) {
-      m_head = new_node;
-    } else {
-      auto *curr = m_head;
-      while (curr->get_next()) {
-        curr = curr->get_next();
-      }
-      curr->set_next(new_node);
-    }
-    m_size++;
-  }
 
   void add(const T &val) { add_node(val); }
 
@@ -91,6 +93,7 @@ public:
 template <typename S>
 std::ostream &operator<<(std::ostream &os, singly_linked_list<S> &l) {
   SNode<S> *curr = l.m_head;
+  os << "size : " << l.size() << std::endl;
   while (curr) {
     os << curr->get_val() << (curr->get_next() ? " , " : "");
     curr = curr->get_next();
