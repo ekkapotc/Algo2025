@@ -75,7 +75,7 @@ public:
 
   singly_linked_list &operator=(singly_linked_list &&other) noexcept {
     if (this != &other) {
-      
+
       SNode<T> *curr = m_head;
 
       while (curr) {
