@@ -29,6 +29,58 @@ public:
     m_data = new T[m_cap];
   }
 
+  stack(const stack &other) {
+    m_size = other.m_size;
+    m_cap = other.m_cap;
+    m_data = nullptr;
+
+    if (m_cap > 0)
+      m_data = new T[m_cap];
+
+    for (size_t i{0}; i < m_size; i++)
+      m_data[i] = other.m_data[i];
+  }
+
+  stack &operator=(const stack &other) {
+    if (this != &other) {
+      delete[] m_data;
+      m_size = other.m_size;
+      m_cap = other.m_cap;
+      m_data = nullptr;
+
+      if (m_cap > 0)
+        m_data = new T[m_cap];
+
+      for (size_t i{0}; i < m_size; i++)
+        m_data[i] = other.m_data[i];
+    }
+    return *this;
+  }
+
+  stack(stack &&other) noexcept {
+    m_size = other.m_size;
+    m_cap = other.m_cap;
+    m_data = other.m_data;
+
+    other.m_size = 0;
+    other.m_cap = 0;
+    other.m_data = nullptr;
+  }
+
+  stack &operator=(stack &&other) noexcept {
+    if (this != &other) {
+      delete[] m_data;
+      m_size = other.m_size;
+      m_cap = other.m_cap;
+      m_data = other.m_data;
+
+      other.m_size = 0;
+      other.m_cap = 0;
+      other.m_data = nullptr;
+    }
+    return *this;
+  }
+
   ~stack() { delete[] m_data; }
 
   bool empty() const { return m_size == 0; }
@@ -67,6 +119,17 @@ public:
     m_size--;
     return std::move(m_data[m_size]);
   }
+
+  T & operator[](size_t index){
+     assert(index>=0 && index<m_size);
+     return m_data[index];
+  }
+
+  const T & operator[](size_t index) const{
+     assert(index>=0 && index<m_size);
+     return m_data[index];
+  }
+
 };
 
 #endif
