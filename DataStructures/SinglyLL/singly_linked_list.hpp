@@ -119,11 +119,11 @@ public:
   }
 
   template <typename S>
-  friend std::ostream &operator<<(std::ostream &os, singly_linked_list<S> &l);
+  friend std::ostream &operator<<(std::ostream &os, const singly_linked_list<S> &l);
 };
 
 template <typename S>
-std::ostream &operator<<(std::ostream &os, singly_linked_list<S> &l) {
+std::ostream &operator<<(std::ostream &os, const singly_linked_list<S> &l) {
   SNode<S> *curr = l.m_head;
   os << "size : " << l.size() << std::endl;
   while (curr) {
