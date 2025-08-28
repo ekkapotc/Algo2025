@@ -6,9 +6,9 @@
 #include "stack.hpp"
 
 template <typename T>
-std::ostream & operator<<(std::ostream & os , const stack<T> & s){
-  for(size_t i{0}; i<s.size() ; i++){
-     os << s[i] << (i+1<s.size()?",":"\n");
+std::ostream &operator<<(std::ostream &os, const stack<T> &s) {
+  for (size_t i{0}; i < s.size(); i++) {
+    os << s[i] << (i + 1 < s.size() ? "," : "\n");
   }
   return os;
 }

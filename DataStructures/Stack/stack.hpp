@@ -120,16 +120,15 @@ public:
     return std::move(m_data[m_size]);
   }
 
-  T & operator[](size_t index){
-     assert(index>=0 && index<m_size);
-     return m_data[index];
+  T &operator[](size_t index) {
+    assert(index >= 0 && index < m_size);
+    return m_data[index];
   }
 
-  const T & operator[](size_t index) const{
-     assert(index>=0 && index<m_size);
-     return m_data[index];
+  const T &operator[](size_t index) const {
+    assert(index >= 0 && index < m_size);
+    return m_data[index];
   }
-
 };
 
 #endif
