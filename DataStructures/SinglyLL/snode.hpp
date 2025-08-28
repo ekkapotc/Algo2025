@@ -1,5 +1,5 @@
-#ifndef NODE_HPP_INC
-#define NODE_HPP_INC
+#ifndef SNODE_HPP_INC
+#define SNODE_HPP_INC
 
 #include <iostream>
 #include <utility>

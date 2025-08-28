@@ -1,21 +1,30 @@
 #include <iostream>
 #include <string>
 
-#include "snode.hpp"
+#include "singly_linked_list.hpp"
 
 int main() {
-  SNode<int> ni1{3};
-  SNode<int> ni2{4};
-  // SNode<int> ni3 = ni2; //since the copy constructor is deleted, this will
-  // trigger a compiler error SNode<int> ni4{5}; ni4 = ni1; //since the copy
-  // assignment operator is deleted, this will trigger a compiler error
-  ni1.set_next(&ni2);
+  singly_linked_list<std::string> list;
 
-  std::string s1{"world"};
+  list.add("Alice");
+  list.add("Bob");
+  list.add("Eve");
+  list.add("Oscar");
+  list.add("Alice");
+  list.add("Mallory");
 
-  SNode<std::string> ns1{"hello"};
-  SNode<std::string> ns2{s1};
-  ns1.set_next(&ns2);
+  std::cout << list << std::endl;
+
+  list.remove("Carol");
+  list.remove("Eve");
+
+  std::cout << list << std::endl;
+
+  list.remove("Alice");
+  list.remove("Mallory");
+  list.remove("Oscar");
+  list.remove("Bob");
+  std::cout << list << std::endl;
 
   return 0;
 }

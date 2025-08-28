@@ -1,6 +1,6 @@
 TARGET := main
 SRC := main.cpp
-HDR := snode.hpp
+HDR := snode.hpp singly_linked_list.hpp 
 OBJ := $(SRC:.cpp=.o)
 
 CXX := g++
