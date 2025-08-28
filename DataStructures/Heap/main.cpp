@@ -2,6 +2,14 @@
 #include <functional>
 #include <iostream>
 
+template <typename S, typename Comp>
+std::ostream &operator<<(std::ostream &os, const heap<S, Comp> &h) {
+  for (size_t i{0}; i < h.size(); i++) {
+    os << h[i] << (i + 1 < h.size() ? " " : "");
+  }
+  return os;
+}
+
 int main() {
   // ===== Test heap<int> construction from array =====
   int arr[] = {4, 8, 2, 0, 9, 5, 12, 32, 20, 18, 6};

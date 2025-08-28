@@ -294,16 +294,6 @@ public:
 
   const T &operator[](size_t index) const { return m_data[index]; }
 
-  template <typename S, typename Comp>
-  friend std::ostream &operator<<(std::ostream &os, const heap<S, Comp> &h);
 };
-
-template <typename S, typename Comp>
-std::ostream &operator<<(std::ostream &os, const heap<S, Comp> &h) {
-  for (size_t i{0}; i < h.m_size; i++) {
-    os << h[i] << (i + 1 < h.m_size ? " " : "");
-  }
-  return os;
-}
 
 #endif
