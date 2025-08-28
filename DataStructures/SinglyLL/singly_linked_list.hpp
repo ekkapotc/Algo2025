@@ -23,11 +23,11 @@ public:
   singly_linked_list &operator=(singly_linked_list &&other) = delete;
 
   ~singly_linked_list() {
-    auto cur_node = m_head;
-    while (cur_node) {
-      auto to_del = cur_node;
-      cur_node = cur_node->get_next();
-      delete to_del;
+    SNode<T> * curr = m_head;
+    while (curr) {
+      SNode<T> * tmp = curr;
+      curr = curr->get_next();
+      delete tmp;
     }
   }
 
