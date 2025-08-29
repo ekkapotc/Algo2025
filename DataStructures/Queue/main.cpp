@@ -24,7 +24,10 @@ void test_basic() {
 void test_copy() {
     std::cout << "\n=== Copy Constructor/Assignment Test ===\n";
     queue<int> q1;
+
     for (int i = 0; i < 6; i++) q1.enqueue(i);
+
+    q1 = q1;// self-assignment
 
     std::cout << "Original queue head=" << q1.head() 
               << " tail=" << q1.tail()
