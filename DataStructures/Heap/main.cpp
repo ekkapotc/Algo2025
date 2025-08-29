@@ -1,6 +1,9 @@
-#include "heap.hpp"
 #include <functional>
 #include <iostream>
+
+#include "heap.hpp"
+
+// ==== Printing Utility ====
 
 template <typename S, typename Comp>
 std::ostream &operator<<(std::ostream &os, const heap<S, Comp> &h) {
@@ -9,6 +12,8 @@ std::ostream &operator<<(std::ostream &os, const heap<S, Comp> &h) {
   }
   return os;
 }
+
+// ==== Test ====
 
 int main() {
   // ===== Test heap<int> construction from array =====
