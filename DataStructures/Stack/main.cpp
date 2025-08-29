@@ -48,6 +48,8 @@ void test_copy_assign() {
     st.push("beta");
     st.push("gamma");
 
+    st = st;// self-assignment
+
     // Copy constructor
     stack<std::string> st_copy(st);
     print_stack(st, "Original stack");
