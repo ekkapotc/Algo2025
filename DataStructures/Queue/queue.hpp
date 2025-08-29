@@ -8,10 +8,10 @@
 template <typename T> class queue {
 private:
   T *m_data;
-  size_t m_size;
-  size_t m_cap;
-  size_t m_head;
-  size_t m_tail;
+  size_t m_size; // indicates size of queue
+  size_t m_cap;  // indicates capicity of queue
+  size_t m_head; // points to head of queue
+  size_t m_tail; // points to first empty slot
 
   bool full() const { return m_size == m_cap; }
 
@@ -19,7 +19,8 @@ private:
     size_t new_cap = m_cap * 2;
     T *new_data = new T[new_cap];
     for (size_t i{0}; i < m_size; i++)
-      // move elements to new buffer in linear order (normalize head=0, tail=m_size)
+      // move elements to new buffer in linear order (normalize head=0,
+      // tail=m_size)
       new_data[i] = std::move(m_data[(m_head + i) % m_cap]);
 
     delete[] m_data;
@@ -30,7 +31,9 @@ private:
   }
 
 public:
-  queue(size_t cap = 4)
+  static constexpr size_t s_INIT_CAP{4};
+
+  queue(size_t cap = s_INIT_CAP)
       : m_data{nullptr}, m_size{0}, m_cap{cap}, m_head{0}, m_tail{0} {
     assert(cap > 0);
     m_data = new T[m_cap];
@@ -103,6 +106,8 @@ public:
   bool empty() const { return m_size == 0; }
 
   size_t size() const { return m_size; }
+
+  size_t capacity() const { return m_cap; }
 
   template <typename S> void enqueue(S &&elem) {
     if (full())
