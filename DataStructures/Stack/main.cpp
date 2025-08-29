@@ -5,7 +5,7 @@
 
 #include "stack.hpp"
 
-// ===== Utility printing =====
+// ===== Printing Utility =====
 
 template <typename T>
 std::ostream &operator<<(std::ostream &os, const stack<T> &s) {

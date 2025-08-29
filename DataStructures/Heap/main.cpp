@@ -13,7 +13,7 @@ std::ostream &operator<<(std::ostream &os, const heap<S, Comp> &h) {
   return os;
 }
 
-// ==== Test ====
+// ==== Tests ====
 
 int main() {
   // ===== Test heap<int> construction from array =====
