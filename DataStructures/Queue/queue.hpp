@@ -19,7 +19,9 @@ private:
     size_t new_cap = m_cap * 2;
     T *new_data = new T[new_cap];
     for (size_t i{0}; i < m_size; i++)
+      // move elements to new buffer in linear order (normalize head=0, tail=m_size)
       new_data[i] = std::move(m_data[(m_head + i) % m_cap]);
+
     delete[] m_data;
     m_data = new_data;
     m_cap = new_cap;
