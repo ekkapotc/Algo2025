@@ -47,7 +47,7 @@ void test_copy() {
 void test_move() {
     std::cout << "\n=== Move Constructor/Assignment Test ===\n";
     queue<std::string> q1;
-    for (int i = 10; i < 15; i++) q1.enqueue(i);
+    for (int i = 10; i < 15; i++) q1.enqueue(std::to_string(i));
 
     // Move constructor
     queue<std::string> q2(std::move(q1));
