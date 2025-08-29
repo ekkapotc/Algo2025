@@ -34,27 +34,73 @@ public:
     m_data = new T[m_cap];
   }
 
+  queue(const queue &other)
+      : m_data{nullptr}, m_size{other.m_size}, m_cap{other.m_cap},
+        m_head{other.m_head}, m_tail{other.m_tail} {
+    if (m_cap > 0)
+      m_data = new T[m_cap];
+    for (size_t i{0}; i < m_size; i++)
+      m_data[(i + m_head) % m_cap] =
+          other.m_data[(i + other.m_head) % other.m_cap];
+  }
+
+  queue(queue &&other) noexcept {
+    m_data = other.m_data;
+    m_size = other.m_size;
+    m_cap = other.m_cap;
+    m_head = other.m_head;
+    m_tail = other.m_tail;
+
+    other.m_data = nullptr;
+    other.m_size = 0;
+    other.m_cap = 0;
+    other.m_head = 0;
+    other.m_tail = 0;
+  }
+
+  queue &operator=(const queue &other) {
+    if (this != &other) {
+      delete[] m_data;
+
+      m_size = other.m_size;
+      m_cap = other.m_cap;
+      m_head = other.m_head;
+      m_tail = other.m_tail;
+
+      if (m_cap > 0)
+        m_data = new T[m_cap];
+
+      for (size_t i{0}; i < m_size; i++)
+        m_data[(i + m_head) % m_cap] =
+            other.m_data[(i + other.m_head) % other.m_cap];
+    }
+    return *this;
+  }
+
+  queue &operator=(queue &&other) noexcept {
+    if (this != &other) {
+      delete[] m_data;
+
+      m_data = other.m_data;
+      m_size = other.m_size;
+      m_cap = other.m_cap;
+      m_head = other.m_head;
+      m_tail = other.m_tail;
+
+      other.m_data = nullptr;
+      other.m_size = 0;
+      other.m_cap = 0;
+      other.m_head = 0;
+      other.m_tail = 0;
+    }
+    return *this;
+  }
+
   ~queue() { delete[] m_data; }
 
   bool empty() const { return m_size == 0; }
 
   size_t size() const { return m_size; }
-
-  /*
-  void enqueue(const T & elem){
-      if(full()) reallocate();
-      m_data[m_tail] = elem;
-      m_tail = (m_tail+1)%m_cap;
-      m_size++;
-  }
-
-  void enqueue(T && elem){
-      if(full()) reallocate();
-      m_data[m_tail] = std::move(elem);
-      m_tail = (m_tail+1)%m_cap;
-      m_size++;
-  }
-  */
 
   template <typename S> void enqueue(S &&elem) {
     if (full())
@@ -67,7 +113,7 @@ public:
   T dequeue() {
     assert(m_size > 0);
     T first = std::move(m_data[m_head]);
-    m_head = (m_head+1)%m_cap;
+    m_head = (m_head + 1) % m_cap;
     m_size--;
     return first;
   }
