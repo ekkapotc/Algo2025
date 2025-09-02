@@ -14,12 +14,13 @@ public:
   /*
   Make explicit to prevent implicit conversions
   */
-  explicit DNode(const T &val) :m_prev{nullptr}, m_next{nullptr}, m_val{val} {}
+  explicit DNode(const T &val) : m_prev{nullptr}, m_next{nullptr}, m_val{val} {}
 
   /*
   Make explicit to prevent implicit conversions
   */
-  explicit DNode(T &&val) : m_prev{nullptr}, m_next{nullptr}, m_val{std::move(val)} {}
+  explicit DNode(T &&val)
+      : m_prev{nullptr}, m_next{nullptr}, m_val{std::move(val)} {}
 
   /*
   Disable copy constructor and copy assignment operator
@@ -36,7 +37,7 @@ public:
   T &get_val() { return m_val; }
 
   const T &get_val() const { return m_val; }
-  
+
   DNode<T> *get_prev() { return m_prev; }
 
   const DNode<T> *get_prev() const { return m_prev; }
