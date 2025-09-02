@@ -1,12 +1,13 @@
 #include <iostream>
 #include <string>
-#include <utility> // for std::move
+#include <utility> 
+
 #include "doubly_linked_list.hpp"
 
 template <typename T>
 std::ostream& operator<<(std::ostream& os, const doubly_linked_list<T>& list) {
     const DNode<T>* curr = list.head();
-    os << "size: " << list.size() << " | values: ";
+    os << "size: " << list.size() << " , values: ";
     if (!curr) return os;
 
     do {
