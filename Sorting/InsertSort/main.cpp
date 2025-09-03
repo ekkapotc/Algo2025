@@ -7,11 +7,11 @@ int main() {
 
   std::vector<int> v = {4, 6, 0, 2, 6, 10, 8, 3, 5, 8, 5, 6, 1};
 
-  insertion_sort<int> i_int{v};
+  insertion_sort<int, DecOrd<int>> i_int{v};
 
   auto sorted_data_int = i_int.sort();
 
-  std::cout << "Sorted: (increasing)" << std::endl;
+  std::cout << "Sorted: (decreasing)" << std::endl;
 
   for (size_t i{0}; i < v.size(); i++) {
     std::cout << sorted_data_int[i] << (i + 1 < v.size() ? "," : "\n");
