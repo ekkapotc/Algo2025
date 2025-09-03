@@ -10,7 +10,14 @@
 #include <utility>
 #include <vector>
 
-template <typename T, typename Compare = std::greater<T>> class heap {
+template <typename T>
+using MaxHeap = std::greater<T>;
+
+template <typename T>
+using MinHeap = std::less<T>;
+
+template <typename T, typename Compare = MaxHeap<T>> class heap {
+
 private:
   T *m_data;
   size_t m_size;
@@ -73,6 +80,7 @@ private:
   }
 
 public:
+
   heap(size_t len = 16) : m_data{nullptr}, m_size{0}, m_cap{len} {
     assert(m_cap > 0);
     m_data = new T[m_cap];

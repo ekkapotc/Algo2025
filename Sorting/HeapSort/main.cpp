@@ -6,7 +6,7 @@ int main() {
 
   std::vector<int> v = {4, 6, 0, 2, 6, 10, 8, 3, 5, 8, 5, 6, 1};
 
-  heap_sort<int, std::less<int>> h_int{v};
+  heap_sort<int,MinHeap<int>> h_int{v};
 
   auto sorted_data_int = h_int.sort();
 
@@ -29,7 +29,7 @@ int main() {
     std::cout << sorted_data_str[i] << (i + 1 < w.size() ? "," : "\n");
   }
 
-  sorted_data_str[4] = std::string{"array"}; 
+  sorted_data_str[4] = std::string{"array"};
 
   sorted_data_str = h_str.sort();
 
