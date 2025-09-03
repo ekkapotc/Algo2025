@@ -2,8 +2,8 @@
 #define INSERTION_SORT_HPP_INC
 
 #include <cassert>
-#include <vector>
 #include <utility>
+#include <vector>
 
 template <typename T> class insertion_sort {
 private:
@@ -32,24 +32,24 @@ public:
       m_data[i] = std::move(vec[i]);
   }
 
-  insertion_sort(const insertion_sort & other ) = delete;
-  
+  insertion_sort(const insertion_sort &other) = delete;
+
   insertion_sort(insertion_sort &&other) = delete;
 
   insertion_sort operator=(const insertion_sort &other) = delete;
 
   insertion_sort operator=(insertion_sort &&other) = delete;
 
-  ~insertion_sort() { delete [] m_data; }
+  ~insertion_sort() { delete[] m_data; }
 
-  T * sort(){
-    if(m_data){
-      for(size_t j{1} ; j<m_len; j++){
+  T *sort() {
+    if (m_data) {
+      for (size_t j{1}; j < m_len; j++) {
         T key = m_data[j];
         size_t i = j;
-        while(i>0 && m_data[i-1]>key){
-	   m_data[i] = m_data[i-1];
-           i--;
+        while (i > 0 && m_data[i - 1] > key) {
+          m_data[i] = m_data[i - 1];
+          i--;
         }
         m_data[i] = key;
       }
@@ -57,7 +57,6 @@ public:
 
     return m_data;
   }
-
 };
 
 #endif
