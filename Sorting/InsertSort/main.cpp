@@ -11,7 +11,7 @@ int main() {
 
   auto sorted_data_int = i_int.sort();
 
-  std::cout << "Sorted: (decreasing)" << std::endl;
+  std::cout << "Sorted: (increasing)" << std::endl;
 
   for (size_t i{0}; i < v.size(); i++) {
     std::cout << sorted_data_int[i] << (i + 1 < v.size() ? "," : "\n");

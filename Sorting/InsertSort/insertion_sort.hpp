@@ -48,10 +48,11 @@ public:
         T key = m_data[j];
         size_t i = j;
         while (i > 0 && m_data[i - 1] > key) {
-          m_data[i] = m_data[i - 1];
+          //m_data[i] = m_data[i - 1];
+          std::swap(m_data[i-1],m_data[i]);
           i--;
         }
-        m_data[i] = key;
+        //m_data[i] = key;
       }
     }
 
