@@ -10,7 +10,11 @@
 
 #include "heap.hpp"
 
-template <typename T, typename Compare = std::greater<T>> class heap_sort {
+template <typename T> using IncOrd = MaxHeap<T>;
+
+template <typename T> using DecOrd = MinHeap<T>;
+
+template <typename T, typename Compare = IncOrd<T>> class heap_sort {
 private:
   T *m_data;
   size_t m_len;

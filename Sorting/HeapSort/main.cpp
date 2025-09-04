@@ -6,7 +6,7 @@ int main() {
 
   std::vector<int> v = {4, 6, 0, 2, 6, 10, 8, 3, 5, 8, 5, 6, 1};
 
-  heap_sort<int,MinHeap<int>> h_int{v};
+  heap_sort<int, DecOrd<int>> h_int{v};
 
   auto sorted_data_int = h_int.sort();
 
