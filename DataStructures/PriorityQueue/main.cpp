@@ -72,7 +72,7 @@ int main() {
 
   // Test MIN-HEAP
   std::cout << "=== Testing MIN-HEAP ===\n";
-  priority_queue<std::string, double, std::less<PQNode<std::string, double>>>
+  priority_queue<std::string, double, MinHeap<PQNode<std::string, double>>>
       min_pq;
   min_pq.insert("Bosco", 1.0);
   min_pq.insert("Liz", 4.5);

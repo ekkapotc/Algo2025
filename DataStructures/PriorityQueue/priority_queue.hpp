@@ -7,7 +7,7 @@
 #include "heap.hpp"
 #include "priority_queue_node.hpp"
 
-template <typename S, typename T, typename Compare = std::greater<PQNode<S, T>>>
+template <typename S, typename T, typename Compare = MaxHeap<PQNode<S, T>>>
 class priority_queue {
 private:
   heap<PQNode<S, T>, Compare> m_heap;
