@@ -29,21 +29,21 @@ public:
   size_t size() const { return m_heap.size(); }
 
   void insert(const S &elem, T prio) {
-    if constexpr (std::is_same_v<Compare, std::greater<PQNode<S, T>>>) {
+    if constexpr (std::is_same_v<Compare, MaxHeap<PQNode<S, T>>>) {
       m_heap.insert(PQNode<S, T>{elem, std::numeric_limits<T>::lowest()});
       update_key(m_heap.size() - 1, prio);
-    } else if constexpr (std::is_same_v<Compare, std::less<PQNode<S, T>>>) {
+    } else if constexpr (std::is_same_v<Compare, MinHeap<PQNode<S, T>>>) {
       m_heap.insert(PQNode<S, T>{elem, std::numeric_limits<T>::max()});
       update_key(m_heap.size() - 1, prio);
     }
   }
 
   void insert(S &&elem, T prio) {
-    if constexpr (std::is_same_v<Compare, std::greater<PQNode<S, T>>>) {
+    if constexpr (std::is_same_v<Compare, MaxHeap<PQNode<S, T>>>) {
       m_heap.insert(
           PQNode<S, T>{std::move(elem), std::numeric_limits<T>::lowest()});
       update_key(m_heap.size() - 1, prio);
-    } else if constexpr (std::is_same_v<Compare, std::less<PQNode<S, T>>>) {
+    } else if constexpr (std::is_same_v<Compare, MinHeap<PQNode<S, T>>>) {
       m_heap.insert(
           PQNode<S, T>{std::move(elem), std::numeric_limits<T>::max()});
       update_key(m_heap.size() - 1, prio);
@@ -61,14 +61,14 @@ public:
   void update_key(size_t pos, const T &new_key) {
     assert(pos < size());
 
-    if constexpr (std::is_same_v<Compare, std::greater<PQNode<S, T>>>) {
+    if constexpr (std::is_same_v<Compare, MaxHeap<PQNode<S, T>>>) {
 
       assert(new_key >= m_heap[pos].get_priority());
 
       if (new_key >= m_heap[pos].get_priority())
         m_heap[pos].set_priority(new_key);
 
-    } else if constexpr (std::is_same_v<Compare, std::less<PQNode<S, T>>>) {
+    } else if constexpr (std::is_same_v<Compare, MinHeap<PQNode<S, T>>>) {
 
       assert(new_key <= m_heap[pos].get_priority());
 
