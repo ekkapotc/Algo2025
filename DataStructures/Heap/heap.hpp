@@ -10,7 +10,12 @@
 #include <utility>
 #include <vector>
 
-template <typename T, typename Compare = std::greater<T>> class heap {
+template <typename T> using MaxHeap = std::greater<T>;
+
+template <typename T> using MinHeap = std::less<T>;
+
+template <typename T, typename Compare = MaxHeap<T>> class heap {
+
 private:
   T *m_data;
   size_t m_size;
@@ -293,7 +298,6 @@ public:
   T &operator[](size_t index) { return m_data[index]; }
 
   const T &operator[](size_t index) const { return m_data[index]; }
-
 };
 
 #endif

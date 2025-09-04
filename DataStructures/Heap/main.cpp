@@ -20,7 +20,7 @@ int main() {
   int arr[] = {4, 8, 2, 0, 9, 5, 12, 32, 20, 18, 6};
   std::cout << "Testing heap<int> from array:" << std::endl;
 
-  heap<int, std::less<int>> heap_int{arr};
+  heap<int, MinHeap<int>> heap_int{arr};
   std::cout << "\tInitial size = " << heap_int.size() << std::endl;
   std::cout << "\tHeap contents: " << heap_int << std::endl;
   std::cout << "\tCurrent root = " << heap_int.root() << std::endl;
