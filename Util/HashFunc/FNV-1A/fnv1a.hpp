@@ -15,9 +15,13 @@ private:
 public:
   fnv1a() = delete;
 
-  fnv1a(const fnv1a &) = delete;
+  fnv1a(const fnv1a &other) = delete;
 
-  fnv1a &operator=(const fnv1a &) = delete;
+  fnv1a(fnv1a &&other) = delete;
+
+  fnv1a operator=(const fnv1a &other) = delete;
+
+  fnv1a operator=(fnv1a &&other) = delete;
 
   fnv1a(const void *key, size_t len) : m_ready{false}, m_hash{fnv1a::Base} {
 
