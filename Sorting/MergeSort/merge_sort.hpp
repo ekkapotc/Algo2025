@@ -13,7 +13,7 @@ template <typename T> using DecOrd = std::less<T>;
 template <typename T, typename Compare = IncOrd<T>> class merge_sort {
 private:
   T *m_data;
-  T *m_temp;
+  T *m_temp; // scratch temporary buffer
   size_t m_len;
   Compare m_cmp;
 
