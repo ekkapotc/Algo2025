@@ -30,8 +30,8 @@ public:
     const size_t nblocks = len / 4; // one block is 4 bytes long
     m_hash = seed;
 
-    const uint32_t c1 = 0xcc9e2d51;
-    const uint32_t c2 = 0x1b873593;
+    constexpr uint32_t c1 = 0xcc9e2d51;
+    constexpr uint32_t c2 = 0x1b873593;
 
     for (size_t i{0}; i < nblocks; i++) {
       uint32_t k1;
